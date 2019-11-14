@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>com.wusx.innerpower.designpattern.factory.simple</OriginalElement>
+  <nodes>
+    <node x="0.0" y="86.0">com.wusx.innerpower.designpattern.factory.simple.JavaVideo</node>
+    <node x="0.0" y="339.0">com.wusx.innerpower.designpattern.factory.simple.SimpleFactory</node>
+    <node x="101.75" y="258.0">com.wusx.innerpower.designpattern.factory.simple.Main</node>
+    <node x="71.25" y="172.0">com.wusx.innerpower.designpattern.factory.simple.VideoFactory</node>
+    <node x="98.25" y="0.0">com.wusx.innerpower.designpattern.factory.simple.Video</node>
+    <node x="156.0" y="86.0">com.wusx.innerpower.designpattern.factory.simple.PythonVideo</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="com.wusx.innerpower.designpattern.factory.simple.VideoFactory" target="com.wusx.innerpower.designpattern.factory.simple.JavaVideo">
+      <point x="-40.0" y="-18.0" />
+      <point x="111.25" y="147.0" />
+      <point x="68.0" y="147.0" />
+      <point x="0.0" y="18.0" />
+    </edge>
+    <edge source="com.wusx.innerpower.designpattern.factory.simple.VideoFactory" target="com.wusx.innerpower.designpattern.factory.simple.PythonVideo">
+      <point x="40.0" y="-18.0" />
+      <point x="191.25" y="147.0" />
+      <point x="234.5" y="147.0" />
+      <point x="0.0" y="18.0" />
+    </edge>
+    <edge source="com.wusx.innerpower.designpattern.factory.simple.JavaVideo" target="com.wusx.innerpower.designpattern.factory.simple.Video">
+      <point x="0.0" y="-18.0" />
+      <point x="68.0" y="61.0" />
+      <point x="124.75" y="61.0" />
+      <point x="-26.5" y="18.0" />
+    </edge>
+    <edge source="com.wusx.innerpower.designpattern.factory.simple.Main" target="com.wusx.innerpower.designpattern.factory.simple.VideoFactory">
+      <point x="0.0" y="-18.0" />
+      <point x="0.0" y="18.0" />
+    </edge>
+    <edge source="com.wusx.innerpower.designpattern.factory.simple.PythonVideo" target="com.wusx.innerpower.designpattern.factory.simple.Video">
+      <point x="0.0" y="-18.0" />
+      <point x="234.5" y="61.0" />
+      <point x="177.75" y="61.0" />
+      <point x="26.5" y="18.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="156.5" y="142.0" />
+  <SelectedNodes />
+  <Categories />
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
