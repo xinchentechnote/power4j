@@ -9,6 +9,8 @@
   <version>1.0-SNAPSHOT</version>
   <modules>
     <module>design-pattern</module>
+    <module>datastructure-algorithm</module>
+    <module>concurrent-art</module>
   </modules>
 
   <packaging>pom</packaging>
