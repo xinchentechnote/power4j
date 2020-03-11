@@ -11,6 +11,8 @@
     <module>design-pattern</module>
     <module>datastructure-algorithm</module>
     <module>concurrent-art</module>
+    <module>thinking-in-spring</module>
+    <module>thinking-in-jvm</module>
   </modules>
 
   <packaging>pom</packaging>
