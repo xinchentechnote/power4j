@@ -11,6 +11,14 @@ public class User {
   private Long id;
   private String name;
 
+  public static User createUser() {
+
+    User user = new User();
+    user.setId(1000L);
+    user.setName("static method");
+    return user;
+  }
+
   public Long getId() {
     return id;
   }

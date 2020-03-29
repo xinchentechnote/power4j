@@ -24,6 +24,7 @@
   <modules>
     <module>java-beans</module>
     <module>ioc-container-overview</module>
+    <module>spring-bean</module>
   </modules>
 
   <dependencyManagement>
