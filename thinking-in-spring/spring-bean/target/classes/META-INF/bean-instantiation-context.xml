@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans
+  http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+  <!--  静态工厂方法-->
+  <bean id="user-by-static-method"
+    class="com.wusx.thinking.in.spring.ioc.overveiw.dependency.domain.User"
+    factory-method="createUser"/>
+
+  <!-- bean工厂方法 -->
+  <bean id="userFactory" class="com.wusx.thinking.in.spring.bean.factory.DefaultUserFactory"/>
+  <bean id="user-by-factory-method" factory-bean="userFactory" factory-method="createUser"/>
+
+  <!--  factoryBean-->
+  <bean id="user-by-factory-bean" class="com.wusx.thinking.in.spring.bean.factory.UserFactoryBean"/>
+</beans>
