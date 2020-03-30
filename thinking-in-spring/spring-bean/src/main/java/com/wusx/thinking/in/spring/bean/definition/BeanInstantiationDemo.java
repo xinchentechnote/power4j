@@ -23,6 +23,14 @@ public class BeanInstantiationDemo {
     System.out.println(userByFactoryBeanMethod);
     System.out.println(userByStaticMethod == userByFactoryMethod);
     System.out.println(userByStaticMethod == userByFactoryBeanMethod);
+    ClassPathXmlApplicationContext applicationContext = (ClassPathXmlApplicationContext) beanFactory;
+    String[] beanDefinitionNames = applicationContext.getBeanDefinitionNames();
+    System.out.println("----------------------");
+    for (int i = 0; i < beanDefinitionNames.length; i++) {
+      System.out.println(beanDefinitionNames[i]);
+    }
+    System.out.println(beanFactory.getBean("user-by-factory-bean"));
+    System.out.println(beanFactory.getBean("&user-by-factory-bean"));
   }
 
 }
