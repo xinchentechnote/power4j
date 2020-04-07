@@ -15,6 +15,7 @@
     <module>thinking-in-spring</module>
     <module>thinking-in-springboot</module>
     <module>thinking-in-springcloud</module>
+
   </modules>
 
   <packaging>pom</packaging>
