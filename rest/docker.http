@@ -1,3 +1,13 @@
 GET http://10.10.201.39:2375/containers/json
 
 ###
+
+POST http://10.3.4.47:10088/transpaas/openapi/getPublicTransitLineFlowWeekId
+Content-Type: application/json
+X-API-KEY: 823073d5241341d394fc6bd2dae98609
+
+{
+  "city": 430030,
+  "travelMode":1
+}
+###
