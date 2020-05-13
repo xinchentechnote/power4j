@@ -1,7 +1,7 @@
 package com.wsx.apache.lang;
 
 import java.util.Arrays;
-import org.apache.commons.lang.ArrayUtils;
+import org.apache.commons.lang3.ArrayUtils;
 
 /**
  * @Description .
@@ -25,7 +25,9 @@ public class ArrayUtilsDemo {
 
     boolean empty = ArrayUtils.isEmpty(data);
     System.out.println(empty);//false
-    //System.out.println(ArrayUtils.shift(clone,2));//{9,5,9,7}
+    //移位
+    ArrayUtils.shift(clone,1);
+    System.out.println(ArrayUtils.toString(clone));//{7,9,5,9
 
   }
 

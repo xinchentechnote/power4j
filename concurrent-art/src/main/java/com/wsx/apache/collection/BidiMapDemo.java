@@ -1,7 +1,7 @@
 package com.wsx.apache.collection;
 
-import org.apache.commons.collections.BidiMap;
-import org.apache.commons.collections.bidimap.DualHashBidiMap;
+import org.apache.commons.collections4.BidiMap;
+import org.apache.commons.collections4.bidimap.DualHashBidiMap;
 
 /**
  * @Description .
@@ -12,11 +12,13 @@ import org.apache.commons.collections.bidimap.DualHashBidiMap;
 public class BidiMapDemo {
 
   public static void main(String[] args) {
-    BidiMap ChineseEnglishMap = new DualHashBidiMap();
-    ChineseEnglishMap.put("hello", "你好");
-    ChineseEnglishMap.put("hello", "你好");
-    ChineseEnglishMap.put("hello1", "你好");
-    System.out.println(ChineseEnglishMap.get("hello"));
-    System.out.println(ChineseEnglishMap.getKey("你好"));
+    BidiMap chineseEnglishMap = new DualHashBidiMap();
+    chineseEnglishMap.put("hello", "你好");
+    chineseEnglishMap.put("hello", "你好");
+    chineseEnglishMap.put("hello1", "你好");
+    System.out.println(chineseEnglishMap.get("hello"));//null
+    System.out.println(chineseEnglishMap.getKey("你好"));//hello1
+    System.out.println(chineseEnglishMap.get("hello1"));//你好
+    System.out.println(chineseEnglishMap);//{hello1=你好}
   }
 }
