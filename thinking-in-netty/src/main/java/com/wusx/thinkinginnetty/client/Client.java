@@ -3,6 +3,7 @@ package com.wusx.thinkinginnetty.client;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
+import io.netty.channel.ChannelOption;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
@@ -36,6 +37,9 @@ public class Client {
     bootstrap
         .group(workerGroup)
         .channel(NioSocketChannel.class)
+        .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 5000)
+        .option(ChannelOption.SO_KEEPALIVE, true)
+        .option(ChannelOption.TCP_NODELAY, true)
         .handler(new ChannelInitializer<SocketChannel>() {
           @Override
           public void initChannel(SocketChannel ch) {
@@ -70,7 +74,7 @@ public class Client {
   }
 
   public static void main(String[] args) {
-    Client client = new Client("127.0.0.1", 6000);
+    Client client = new Client("127.0.0.1", 8000);
     client.connect(MAX_RETRY);
   }
 }
