@@ -10,6 +10,7 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
+import io.netty.handler.timeout.IdleStateHandler;
 
 /**
  * @Description .
@@ -41,6 +42,8 @@ public class Server {
           protected void initChannel(NioSocketChannel ch) {
             ChannelPipeline pipeline = ch.pipeline();
             pipeline.addLast(new LoggingHandler(LogLevel.DEBUG));
+            pipeline.addLast(new IdleStateHandler(10, 10, 20));
+            pipeline.addLast(new ServerHandler());
           }
         });
   }
