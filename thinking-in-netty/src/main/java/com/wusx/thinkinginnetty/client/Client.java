@@ -1,6 +1,7 @@
 package com.wusx.thinkinginnetty.client;
 
 import io.netty.bootstrap.Bootstrap;
+import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelOption;
@@ -28,6 +29,7 @@ public class Client {
 
   private NioEventLoopGroup workerGroup;
   private Bootstrap bootstrap;
+  private Channel channel;
 
   public Client(String host, int port) {
     this.host = host;
@@ -56,6 +58,7 @@ public class Client {
       if (future.isSuccess()) {
         log.info("{}-{}-连接成功!", connect.channel().localAddress(),
             connect.channel().remoteAddress());
+        this.channel = connect.channel();
         final Client client = this;
         connect.channel().closeFuture().addListener(f -> {
           client.connect(MAX_RETRY);
