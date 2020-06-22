@@ -76,11 +76,11 @@ public class RingBufferWorkerPoolFactory {
     //6、启动工作线程池
     this.workerPool.start(new ThreadPoolExecutor(Runtime.getRuntime().availableProcessors(),
         Runtime.getRuntime().availableProcessors() * 2,
-        60,
-        TimeUnit.SECONDS,
-        new ArrayBlockingQueue<Runnable>(1000),
-        new ThreadFactoryBuilder().setNameFormat("disruptor-thread-%d").build(),
-        new AbortPolicy()
+            60,
+                        TimeUnit.SECONDS,
+                        new ArrayBlockingQueue<Runnable>(1000),
+                        new ThreadFactoryBuilder().setNameFormat("disruptor-thread-%d").build(),
+                        new AbortPolicy()
     ));
   }
 

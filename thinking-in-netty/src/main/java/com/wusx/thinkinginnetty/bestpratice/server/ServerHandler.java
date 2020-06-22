@@ -1,4 +1,4 @@
-package com.wusx.thinkinginnetty.sever;
+package com.wusx.thinkinginnetty.bestpratice.server;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
