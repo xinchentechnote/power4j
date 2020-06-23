@@ -47,13 +47,19 @@ public class RingBufferWorkerPoolFactory {
   /** 生产者池.*/
   private Map<String, MessageProducer> producers = new ConcurrentHashMap<>();
 
-
+  /** 核心ringBuffer.*/
   private RingBuffer<TranslatorDataWrapper> ringBuffer;
-
+  /** 信号栅栏.*/
   private SequenceBarrier sequenceBarrier;
-
+  /** 工作线程池.*/
   private WorkerPool<TranslatorDataWrapper> workerPool;
 
+  /**
+   * @Description 初始化并启动.
+   * @Author:wusx
+   * @Date 9:24 2020/6/23
+   * @Modified
+   */
   public void initAndStart(ProducerType type, int bufferSize, WaitStrategy waitStrategy,
       MessageConsumer[] messageConsumers) {
     //1、构建ringBuffer
@@ -76,14 +82,20 @@ public class RingBufferWorkerPoolFactory {
     //6、启动工作线程池
     this.workerPool.start(new ThreadPoolExecutor(Runtime.getRuntime().availableProcessors(),
         Runtime.getRuntime().availableProcessors() * 2,
-            60,
-                        TimeUnit.SECONDS,
-                        new ArrayBlockingQueue<Runnable>(1000),
-                        new ThreadFactoryBuilder().setNameFormat("disruptor-thread-%d").build(),
-                        new AbortPolicy()
+        60,
+        TimeUnit.SECONDS,
+        new ArrayBlockingQueue<Runnable>(1000),
+        new ThreadFactoryBuilder().setNameFormat("disruptor-thread-%d").build(),
+        new AbortPolicy()
     ));
   }
 
+  /**
+   * @Description 根据id获取生产者.
+   * @Author:wusx
+   * @Date 9:25 2020/6/23
+   * @Modified
+   */
   public MessageProducer getMessageProducer(String producerId) {
 
     MessageProducer messageProducer = this.producers.get(producerId);
