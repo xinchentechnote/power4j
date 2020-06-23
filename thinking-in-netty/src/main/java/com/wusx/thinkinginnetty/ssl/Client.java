@@ -19,6 +19,7 @@ import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 import io.netty.handler.ssl.SslContext;
 import io.netty.handler.ssl.SslContextBuilder;
+import io.netty.handler.ssl.util.InsecureTrustManagerFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.ClassPathResource;
 
@@ -50,9 +51,13 @@ public class Client {
     try {
 
       final SslContext sslCtx = SslContextBuilder.forClient()
+          //双向认证
           .keyManager(new ClassPathResource(clientCrt).getInputStream(),
               new ClassPathResource(clientKey).getInputStream())
+          //校验对方证书
           .trustManager(new ClassPathResource(caCrt).getInputStream())
+          //不校验server
+          //.trustManager(InsecureTrustManagerFactory.INSTANCE)
           .build();
       bootstrap.group(eventLoopGroup)
           .channel(NioSocketChannel.class)

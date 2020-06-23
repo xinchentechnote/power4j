@@ -46,7 +46,7 @@ public class Server {
           @Override
           protected void initChannel(NioSocketChannel ch) throws Exception {
             ChannelPipeline pipeline = ch.pipeline();
-            pipeline.addLast(MySslContextBuilder.build(ClientAuth.NONE).newHandler(ch.alloc()));
+            pipeline.addLast(MySslContextBuilder.build(ClientAuth.OPTIONAL).newHandler(ch.alloc()));
             pipeline.addLast(new LoggingHandler(LogLevel.DEBUG));
             pipeline.addLast(new LineBasedFrameDecoder(100));
             pipeline.addLast(new StringDecoder());

@@ -31,8 +31,11 @@ public class MySslContextBuilder {
       certInput = new ClassPathResource(serverCrt).getInputStream();
       priKeyInput = new ClassPathResource(serverKey).getInputStream();
       caInput = new ClassPathResource(caCrt).getInputStream();
-      return SslContextBuilder.forServer(certInput, priKeyInput)
+      return SslContextBuilder
+          //双向校验
+          .forServer(certInput, priKeyInput)
           .clientAuth(clientAuth)
+          //校验对方证书
           .trustManager(caInput).build();
     } catch (Throwable e) {
       log.error("HidsSslContextBuilder", e);
