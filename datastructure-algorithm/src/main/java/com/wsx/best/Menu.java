@@ -5,6 +5,8 @@ package com.wsx.best;
  * @Date: Created in 19:21 2020/4/7 0007.
  * @Description .
  * @Modified By:
+ * 基于左右值编码设计：https://www.cnblogs.com/mokingone/p/9109021.html
+ * 巧用数据结构微信博文：http://mp.weixin.qq.com/s?__biz=MzU4NzU0MDIzOQ==&mid=2247487892&idx=1&sn=c46fd90fe39b7f5ed492e0552e1b6e20&chksm=fdeb23f4ca9caae234ac38c469a99e39ad4504f05a35aeea8d33716f949a491b4c51a340fbb7&mpshare=1&scene=24&srcid=0110wvzK2tr15yfBpz3pYqal&sharer_sharetime=1578664277496&sharer_shareid=e29e4e21eafc198305d6179bca437c8a#rd
  */
 
 import java.util.ArrayList;
