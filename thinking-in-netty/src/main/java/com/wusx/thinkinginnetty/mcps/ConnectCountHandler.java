@@ -1,4 +1,4 @@
-package com.wusx.thinkinginnetty.bestpratice.server;
+package com.wusx.thinkinginnetty.mcps;
 
 import io.netty.channel.ChannelHandler.Sharable;
 import io.netty.channel.ChannelHandlerContext;
