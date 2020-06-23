@@ -11,6 +11,9 @@ import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
+import io.netty.handler.codec.LineBasedFrameDecoder;
+import io.netty.handler.codec.string.StringDecoder;
+import io.netty.handler.codec.string.StringEncoder;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 import io.netty.handler.ssl.ClientAuth;
@@ -45,6 +48,10 @@ public class Server {
             ChannelPipeline pipeline = ch.pipeline();
             pipeline.addLast(MySslContextBuilder.build(ClientAuth.NONE).newHandler(ch.alloc()));
             pipeline.addLast(new LoggingHandler(LogLevel.DEBUG));
+            pipeline.addLast(new LineBasedFrameDecoder(100));
+            pipeline.addLast(new StringDecoder());
+            pipeline.addLast(new StringEncoder());
+            pipeline.addLast(new ServerHandler());
           }
         });
 
