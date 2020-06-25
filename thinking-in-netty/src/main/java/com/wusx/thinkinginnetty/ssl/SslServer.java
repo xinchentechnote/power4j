@@ -1,7 +1,5 @@
 package com.wusx.thinkinginnetty.ssl;
 
-import com.wusx.thinkinginnetty.mcps.ConnectConstant;
-import com.wusx.thinkinginnetty.mcps.ConnectCountHandler;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelInitializer;
@@ -26,12 +24,12 @@ import lombok.extern.slf4j.Slf4j;
  * @Modified By:
  */
 @Slf4j
-public class Server {
+public class SslServer {
 
   private static int PORT = 9999;
 
   public static void main(String[] args) {
-    new Server().start(PORT);
+    new SslServer().start(PORT);
   }
 
   public void start(int port) {

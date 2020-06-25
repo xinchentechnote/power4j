@@ -1,6 +1,5 @@
 package com.wusx.thinkinginnetty.ssl;
 
-import com.wusx.thinkinginnetty.mcps.ConnectConstant;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelFutureListener;
@@ -19,18 +18,17 @@ import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 import io.netty.handler.ssl.SslContext;
 import io.netty.handler.ssl.SslContextBuilder;
-import io.netty.handler.ssl.util.InsecureTrustManagerFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.ClassPathResource;
 
 /**
- * @Description .
+ * @Description 打印SSL调测日志查看双方SSL握手过程：-Djavax.net.debug=ssl,handshake,data,trustmanager.
  * @Author:ShangxiuWu
  * @Date: 9:46 2020/6/23.
  * @Modified By:
  */
 @Slf4j
-public class Client {
+public class SslClient {
 
   private static int PORT = 9999;
 
@@ -41,16 +39,11 @@ public class Client {
   private final static String caCrt = "ssl/ca.crt";
   private final static String keyPassword = "sutpc123";
 
-  public static void main(String[] args) {
-    new Client().start(SERVER_HOST, PORT);
-  }
+  final static SslContext sslCtx = null;
 
-  public void start(String host, int port) {
-    EventLoopGroup eventLoopGroup = new NioEventLoopGroup();
-    Bootstrap bootstrap = new Bootstrap();
+  static {
     try {
-
-      final SslContext sslCtx = SslContextBuilder.forClient()
+      SslContextBuilder.forClient()
           //双向认证
           .keyManager(new ClassPathResource(clientCrt).getInputStream(),
               new ClassPathResource(clientKey).getInputStream())
@@ -59,6 +52,21 @@ public class Client {
           //不校验server
           //.trustManager(InsecureTrustManagerFactory.INSTANCE)
           .build();
+    } catch (Exception e) {
+      log.warn("ssl load failed...");
+    }
+  }
+
+
+  public static void main(String[] args) {
+    new SslClient().start(SERVER_HOST, PORT);
+  }
+
+  public void start(String host, int port) {
+    EventLoopGroup eventLoopGroup = new NioEventLoopGroup();
+    Bootstrap bootstrap = new Bootstrap();
+    try {
+
       bootstrap.group(eventLoopGroup)
           .channel(NioSocketChannel.class)
           .option(ChannelOption.SO_REUSEADDR, true)
@@ -66,7 +74,9 @@ public class Client {
             @Override
             protected void initChannel(NioSocketChannel ch) throws Exception {
               ChannelPipeline pipeline = ch.pipeline();
-              pipeline.addLast(sslCtx.newHandler(ch.alloc()));
+              if (null != sslCtx) {
+                pipeline.addLast(sslCtx.newHandler(ch.alloc()));
+              }
               pipeline.addLast(new LoggingHandler(LogLevel.DEBUG));
               pipeline.addLast(new LineBasedFrameDecoder(100));
               pipeline.addLast(new StringDecoder());
