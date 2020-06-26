@@ -5,6 +5,8 @@ package com.wsx.play.datastructure;
  * @Date: Created in 19:18 2020/4/7 0007.
  * @Description 玩转数据结构，数组.
  * @Modified By:
+ * 复杂度分析：
+ *
  */
 public class Array<E> {
 
@@ -34,11 +36,13 @@ public class Array<E> {
 
   //添加元素
   public void add(int index, E e) {
-    if (this.size == data.length) {
-      throw new IllegalArgumentException("addLast failed. Array is full..");
-    }
+
     if (index < 0 || index > size) {
       throw new IllegalArgumentException("addLast failed. Require 0<=index<=size");
+    }
+
+    if (this.size == data.length) {
+      resize(2 * data.length);
     }
 
     for (int i = this.size; i > index; i--) {
@@ -90,8 +94,11 @@ public class Array<E> {
     for (int i = index; i < size - 1; i++) {
       data[i] = data[i + 1];
     }
-    data[size] = null;
+    data[size - 1] = null;
     size--;
+    if (size == data.length / 2) {
+      resize(data.length * 3 / 4);
+    }
     return result;
   }
 
@@ -122,6 +129,14 @@ public class Array<E> {
     return this.size == 0;
   }
 
+  private void resize(int capacity) {
+    E[] newData = (E[]) new Object[capacity];
+    for (int i = 0; i < size; i++) {
+      newData[i] = data[i];
+    }
+    data = newData;
+  }
+
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
@@ -139,7 +154,8 @@ public class Array<E> {
   }
 
   public static void main(String[] args) {
-    Array<Integer> array = new Array<>(16);
+    Array<Integer> array = new Array<>(5);
+    System.out.println(array.toString());
     for (int i = 0; i < 10; i++) {
       array.addLast(i);
     }
