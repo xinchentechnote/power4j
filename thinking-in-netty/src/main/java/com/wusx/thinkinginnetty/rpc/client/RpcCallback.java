@@ -6,6 +6,9 @@ package com.wusx.thinkinginnetty.rpc.client;
  * @Date: 21:20 2020/6/21.
  * @Modified By:
  */
-public class RpcCallback {
+public interface RpcCallback {
 
+  void success(Object result);
+
+  void failed(Object result);
 }
