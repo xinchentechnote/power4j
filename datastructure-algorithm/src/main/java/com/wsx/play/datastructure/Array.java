@@ -6,7 +6,10 @@ package com.wsx.play.datastructure;
  * @Description 玩转数据结构，数组.
  * @Modified By:
  * 复杂度分析：
- *
+ * 添加 O(n)
+ * 查找 O(n)
+ * 删除 O(n)
+ * 修改 O(1)
  */
 public class Array<E> {
 
@@ -60,6 +63,14 @@ public class Array<E> {
     return data[index];
   }
 
+  public E getFirst() {
+    return get(0);
+  }
+
+  public E getLast() {
+    return get(size - 1);
+  }
+
   //修改
   public void set(int index, E e) {
     if (index < 0 || index >= size) {
@@ -96,8 +107,8 @@ public class Array<E> {
     }
     data[size - 1] = null;
     size--;
-    if (size == data.length / 2) {
-      resize(data.length * 3 / 4);
+    if ((size == data.length / 4) && (data.length / 2 != 0)) {
+      resize(data.length / 2);
     }
     return result;
   }
