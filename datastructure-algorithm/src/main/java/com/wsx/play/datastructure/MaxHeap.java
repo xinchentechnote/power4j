@@ -7,6 +7,6 @@ package com.wsx.play.datastructure;
  * @Date: 9:23 2020/6/19.
  * @Modified By:
  */
-public class MinHeap {
+public class MaxHeap {
 
 }
