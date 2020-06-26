@@ -173,7 +173,7 @@ public class RpcConnectManager {
           log.info("successfully connect to {}", address);
           RpcClientHandler rpcClientHandler = future.channel().pipeline()
               .get(RpcClientHandler.class);
-          addHandler(address, rpcClientHandler);
+          addHandler(rpcClientHandler);
         }
       }
     });
@@ -187,9 +187,10 @@ public class RpcConnectManager {
    *@Date 11:33 2020/6/25
    *@Modified
    */
-  private void addHandler(InetSocketAddress socketAddress, RpcClientHandler rpcClientHandler) {
+  private void addHandler(RpcClientHandler rpcClientHandler) {
     clientHandlerList.add(rpcClientHandler);
-    clientHandlerMap.put(socketAddress, rpcClientHandler);
+    clientHandlerMap
+        .put((InetSocketAddress) rpcClientHandler.getChannel().remoteAddress(), rpcClientHandler);
     //唤醒可用的业务执行器signalAvailableHandler
     signalAvailableHandler();
   }
