@@ -127,6 +127,4 @@ public class LoopQueue<E> implements Queue<E> {
     }
     System.out.println(stopwatch.stop().toString());
   }
-
-
 }
