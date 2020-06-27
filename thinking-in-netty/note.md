@@ -11,7 +11,11 @@ client 端口 1025-65535 约6w
 
 #突破全局文件句柄限制
 
-
+#查看端口状态
+netstat -ntp | grep 8000
+netstat -s | grep "SYNs to LISTEN"
+ss -ltn
+netstat -s | grep "listen queue"
 ```
 2、netty整合ssl，客户端和服务端互调
 

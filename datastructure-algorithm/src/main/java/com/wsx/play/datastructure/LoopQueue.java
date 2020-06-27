@@ -1,5 +1,6 @@
 package com.wsx.play.datastructure;
 
+import com.google.common.base.Stopwatch;
 import lombok.ToString;
 
 /**
@@ -110,6 +111,22 @@ public class LoopQueue<E> implements Queue<E> {
     System.out.println(loopQueue.dequeue());
     System.out.println(loopQueue);
 
+    testQueue(new ArrayQueue<>(),1000000);
+    testQueue(new LoopQueue<>(),100000);
+
   }
+
+  public static void testQueue(Queue<Integer> queue,int num){
+
+    Stopwatch stopwatch = Stopwatch.createStarted();
+    for (int i = 0; i < num; i++) {
+      queue.enqueue(i);
+    }
+    for (int i = 0; i < num; i++) {
+      queue.dequeue();
+    }
+    System.out.println(stopwatch.stop().toString());
+  }
+
 
 }
