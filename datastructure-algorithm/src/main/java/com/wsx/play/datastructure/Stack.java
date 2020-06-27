@@ -1,7 +1,5 @@
 package com.wsx.play.datastructure;
 
-import sun.net.idn.Punycode;
-
 /**
  * @Description 数据结构：栈（LIFO）.
  * @Author:ShangxiuWu
