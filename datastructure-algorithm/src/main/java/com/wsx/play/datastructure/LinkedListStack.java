@@ -43,8 +43,8 @@ public class LinkedListStack<E> implements Stack<E> {
 
 
   public static void main(String[] args) {
-    testStack(new LinkedListStack<>(), 1000_0000);
-    testStack(new ArrayStack<>(), 1000_0000);
+    testStack(new LinkedListStack<>(), 100_0000);
+    testStack(new ArrayStack<>(), 100_0000);
   }
 
   public static void testStack(Stack<Integer> stack, int num) {

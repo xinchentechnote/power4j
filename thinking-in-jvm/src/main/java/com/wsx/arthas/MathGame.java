@@ -22,7 +22,13 @@ public class MathGame {
     while (true) {
       game.run();
       TimeUnit.SECONDS.sleep(1);
+      int sum = game.sum(1, 2);
+      System.out.println(sum);
     }
+  }
+
+  public int sum(int a, int b) {
+    return a + b;
   }
 
   public void run() throws InterruptedException {
