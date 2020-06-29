@@ -111,8 +111,11 @@ public class LoopQueue<E> implements Queue<E> {
     System.out.println(loopQueue.dequeue());
     System.out.println(loopQueue);
 
-    testQueue(new ArrayQueue<>(),1000000);
-    testQueue(new LoopQueue<>(),100000);
+    int count = 10_000_000;
+
+    //testQueue(new ArrayQueue<>(),count);
+    testQueue(new LoopQueue<>(),count);
+    testQueue(new LinkedListQueue<>(),count);
 
   }
 
