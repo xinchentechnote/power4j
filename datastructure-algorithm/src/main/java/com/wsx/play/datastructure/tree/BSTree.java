@@ -92,7 +92,7 @@ public class BSTree<T extends Comparable<T>> {
     System.out.println();
   }
 
-  //前序遍历
+  //前序遍历：打印
   private void preOrder(BSTNode<T> node) {
     if (null == node) {
       return;
@@ -103,7 +103,7 @@ public class BSTree<T extends Comparable<T>> {
   }
 
 
-  //中序遍历
+  //中序遍历：排序
   public void inOrder() {
     inOrder(this.rootNode);
     System.out.println();
@@ -118,7 +118,7 @@ public class BSTree<T extends Comparable<T>> {
     inOrder(node.right);
   }
 
-  //后序遍历
+  //后序遍历：释放内存
   public void postOrder() {
     postOrder(this.rootNode);
     System.out.println();
