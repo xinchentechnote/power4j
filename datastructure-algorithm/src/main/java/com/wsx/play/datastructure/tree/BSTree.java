@@ -1,5 +1,9 @@
 package com.wsx.play.datastructure.tree;
 
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Stack;
+
 /**
  * @Description 二分搜索树.
  * @Author:ShangxiuWu
@@ -18,9 +22,17 @@ public class BSTree<T extends Comparable<T>> {
     }
     System.out.println(bst);
     bst.preOrder();
+    bst.preOrderNR();
     //排序
     bst.inOrder();
+    bst.remove(5);
     bst.postOrder();
+    System.out.println("---------层序遍历--------");
+    bst.levelOrder();
+    while (!bst.isEmpty()) {
+      System.out.print(bst.removeMax() + " ");
+    }
+    System.out.println();
 
   }
 
@@ -86,9 +98,26 @@ public class BSTree<T extends Comparable<T>> {
     }
   }
 
-  //递归遍历
+  //递归前序遍历
   public void preOrder() {
     preOrder(this.rootNode);
+    System.out.println();
+  }
+
+  //非递归前序遍历
+  public void preOrderNR() {
+    Stack<BSTNode> stack = new Stack<>();
+    stack.push(rootNode);
+    while (!stack.empty()) {
+      BSTNode pop = stack.pop();
+      System.out.print(pop.value + " ");
+      if (null != pop.right) {
+        stack.push(pop.right);
+      }
+      if (null != pop.left) {
+        stack.push(pop.left);
+      }
+    }
     System.out.println();
   }
 
@@ -97,7 +126,7 @@ public class BSTree<T extends Comparable<T>> {
     if (null == node) {
       return;
     }
-    System.out.print(node.value+" ");
+    System.out.print(node.value + " ");
     preOrder(node.left);
     preOrder(node.right);
   }
@@ -114,7 +143,7 @@ public class BSTree<T extends Comparable<T>> {
       return;
     }
     inOrder(node.left);
-    System.out.print(node.value+" ");
+    System.out.print(node.value + " ");
     inOrder(node.right);
   }
 
@@ -130,8 +159,139 @@ public class BSTree<T extends Comparable<T>> {
     }
     postOrder(node.left);
     postOrder(node.right);
-    System.out.print(node.value+" ");
+    System.out.print(node.value + " ");
   }
+
+  /**
+   *@Description 层序遍历（广度优先遍历）.
+   *@Author wusx
+   *@Date 14:16 2020/7/5
+   *@Modified
+   */
+  public void levelOrder() {
+    Queue<BSTNode> queue = new LinkedList<>();
+    queue.add(rootNode);
+    while (!queue.isEmpty()) {
+      BSTNode remove = queue.remove();
+      if (null != remove.left) {
+        queue.add(remove.left);
+      }
+      if (null != remove.right) {
+        queue.add(remove.right);
+      }
+      System.out.print(remove.value + " ");
+    }
+    System.out.println();
+  }
+
+  /**
+   *@Description 二分搜索树的最小值.
+   *@Author wusx
+   *@Date 14:25 2020/7/5
+   *@Modified
+   */
+  public T minimum() {
+    if (this.isEmpty()) {
+      throw new IllegalArgumentException("BST is empty");
+    }
+    return minimum(rootNode).value;
+  }
+
+  private BSTNode<T> minimum(BSTNode<T> node) {
+    if (null == node.left) {
+      return node;
+    }
+    return minimum(node.left);
+  }
+
+  public T removeMin() {
+    T t = minimum();
+    rootNode = removeMin(rootNode);
+    return t;
+  }
+
+  private BSTNode<T> removeMin(BSTNode<T> node) {
+    if (null == node.left) {
+      BSTNode<T> right = node.right;
+      node.right = null;
+      size--;
+      return right;
+    }
+    node.left = removeMin(node.left);
+    return node;
+  }
+
+  /**
+   *@Description 二分搜索树的最大值.
+   *@Author wusx
+   *@Date 14:24 2020/7/5
+   *@Modified
+   */
+  public T maximum() {
+    if (this.isEmpty()) {
+      throw new IllegalArgumentException("BST is empty");
+    }
+    return maximum(rootNode).value;
+  }
+
+  private BSTNode<T> maximum(BSTNode<T> node) {
+    if (null == node.right) {
+      return node;
+    }
+    return maximum(node.right);
+  }
+
+  /**
+   *@Description 删除最大值.
+   *@Author wusx
+   *@Date 14:48 2020/7/5
+   *@Modified
+   */
+  public T removeMax() {
+    T t = maximum();
+    rootNode = removeMax(rootNode);
+    return t;
+  }
+
+  private BSTNode<T> removeMax(BSTNode<T> node) {
+    if (null == node.right) {
+      BSTNode<T> left = node.left;
+      node.left = null;
+      size--;
+      return left;
+    }
+    node.right = removeMax(node.right);
+    return node;
+  }
+
+  /**
+   *@Description 删除任意元素.
+   *@Author wusx
+   *@Date 14:49 2020/7/5
+   *@Modified
+   */
+  public void remove(T value) {
+    rootNode = remove(rootNode, value);
+  }
+
+  private BSTNode<T> remove(BSTNode<T> node, T value) {
+    if (null == node) {
+      return null;
+    }
+    if (value.compareTo(node.value) > 0) {
+      return remove(node.right, value);
+    } else if (value.compareTo(node.value) < 0) {
+      return remove(node.left, value);
+    } else {
+      BSTNode newNode = minimum(node.right);
+      newNode.right = removeMin(node.right);
+      newNode.left = node.left;
+
+      node.left = node.right = null;
+      return newNode;
+    }
+  }
+
 
   @Override
   public String toString() {
@@ -146,8 +306,8 @@ public class BSTree<T extends Comparable<T>> {
       return;
     }
     builder.append(generateDepthString(depth) + node.value + "\n");
-    generateBSTString(node.left,depth+1,builder);
-    generateBSTString(node.right,depth+1,builder);
+    generateBSTString(node.left, depth + 1, builder);
+    generateBSTString(node.right, depth + 1, builder);
   }
 
   private String generateDepthString(int depth) {
