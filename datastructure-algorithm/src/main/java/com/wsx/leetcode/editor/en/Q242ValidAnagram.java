@@ -45,12 +45,12 @@ public class Q242ValidAnagram {
       if (s.length() != t.length()) {
         return false;
       }
-      int[] counts = new int[26];
+      char[] counts = new char[26];
       for (int i = 0; i < s.length(); i++) {
         counts[s.charAt(i) - 'a'] += 1;
       }
       for (int i = 0; i < t.length(); i++) {
-        int count = counts[t.charAt(i) - 'a'];
+        char count = counts[t.charAt(i) - 'a'];
         if (count == 0) {
           return false;
         } else if (count > 0) {
