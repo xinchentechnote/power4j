@@ -45,6 +45,12 @@ public class Q35SearchInsertPosition{
 static
     //leetcode submit region begin(Prohibit modification and deletion)
   class Solution {
+      /**
+       * @Description .
+       * @Author:wusx
+       * @Date 15:34 2020/7/6
+       * @Modified
+       */
         public int searchInsert(int[] nums, int target) {
             if (nums[nums.length - 1] < target) {
                 return nums.length;
@@ -57,6 +63,12 @@ static
             return -1;
         }
 
+        /**
+         * @Description 递归调用.
+         * @Author:wusx
+         * @Date 15:34 2020/7/6
+         * @Modified
+         */
         public int searchInsert1(int[] nums, int target) {
           return searchInsert(nums, target, 0, nums.length - 1);
         }

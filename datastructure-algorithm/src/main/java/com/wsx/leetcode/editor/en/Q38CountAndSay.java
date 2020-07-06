@@ -53,6 +53,7 @@ public class Q38CountAndSay {
   public static void main(String[] args) {
     Solution solution = new Solution();
     // TO TEST
+    System.out.println(solution.countAndSay(5));
   }
 
   static
@@ -60,8 +61,29 @@ public class Q38CountAndSay {
   class Solution {
 
     public String countAndSay(int n) {
-      return null;
+      if (n == 1) {
+        return "1";
+      }
+      String countAndSay = countAndSay(n - 1);
+      char c = countAndSay.charAt(0);
+      int count = 0;
+      StringBuilder builder = new StringBuilder();
+      for (int i = 0; i < countAndSay.length(); i++) {
+        if (c == countAndSay.charAt(i)) {
+          count++;
+        } else {
+          builder.append(count).append(c);
+          c = countAndSay.charAt(i);
+          count = 1;
+        }
+        if (i == countAndSay.length() - 1) {
+          builder.append(count).append(c);
+        }
+      }
+
+      return builder.toString();
     }
+
   }
 //leetcode submit region end(Prohibit modification and deletion)
 
