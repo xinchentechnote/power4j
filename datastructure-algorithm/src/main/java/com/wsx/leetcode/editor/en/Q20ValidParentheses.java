@@ -56,8 +56,10 @@ import java.util.Stack;
 //Java：Valid Parentheses
 public class Q20ValidParentheses{
     public static void main(String[] args) {
+        String data = "()[]{}";
         Solution solution = new Solution();
         // TO TEST
+        System.out.println(solution.isValid(data));
     }
 static
     //leetcode submit region begin(Prohibit modification and deletion)

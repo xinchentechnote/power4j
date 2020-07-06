@@ -1,4 +1,5 @@
 package com.wsx.leetcode.editor.en;
+
 //Given an array of integers, return indices of the two numbers such that they a
 //dd up to a specific target. 
 //
@@ -14,13 +15,20 @@ package com.wsx.leetcode.editor.en;
 //return [0, 1].
 // 
 // Related Topics Array Hash Table 
-// 👍 15527 👎 559
+// 👍 15533 👎 559
 
 
 import java.util.HashMap;
 import java.util.Map;
 
-//leetcode submit region begin(Prohibit modification and deletion)
+//Java：Two Sum
+public class Q1TwoSum{
+    public static void main(String[] args) {
+        Solution solution = new Solution();
+        // TO TEST
+    }
+static
+    //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public int[] twoSum(int[] nums, int target) {
         Map<Integer, Integer> map = new HashMap<>();
@@ -36,3 +44,5 @@ class Solution {
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
+
+}
