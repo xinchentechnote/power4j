@@ -59,6 +59,7 @@ public class Q347TopKFrequentElements {
           map.put(nums[i], 1);
         }
       }
+      //TODO 使用比较器
       PriorityQueue<Freq> queue = new PriorityQueue<>(k);
       for (Integer key : map.keySet()) {
         Freq freq = new Freq(key, map.get(key));
