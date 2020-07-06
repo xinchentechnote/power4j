@@ -28,6 +28,14 @@ public class Array<E> {
     this.size = 0;
   }
 
+  public Array(E[] data) {
+    this.data = (E[]) new Object[data.length];
+    for (int i = 0; i < data.length; i++) {
+      this.data[i] = data[i];
+    }
+    this.size = data.length;
+  }
+
   //增删改查
   public void addFirst(E e) {
     add(0, e);
@@ -64,6 +72,9 @@ public class Array<E> {
   }
 
   public E getFirst() {
+    if (isEmpty()) {
+      throw new IllegalArgumentException("heap is empty.");
+    }
     return get(0);
   }
 
@@ -86,6 +97,15 @@ public class Array<E> {
       }
     }
     return false;
+  }
+
+  public void swap(int i, int j) {
+    if (i < 0 || i >= size || j < 0 || j >= size) {
+      throw new IllegalArgumentException("index is illegal.");
+    }
+    E datum = data[i];
+    data[i] = data[j];
+    data[j] = datum;
   }
 
   public int find(E e) {
@@ -118,6 +138,9 @@ public class Array<E> {
   }
 
   public E removeLast() {
+    if (size < 1) {
+      throw new IllegalArgumentException("heap is empty.");
+    }
     return remove(size - 1);
   }
 
