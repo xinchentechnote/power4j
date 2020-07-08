@@ -1,4 +1,4 @@
-package com.wsx.math;
+package com.wsx.gupao;
 
 /**.
  * @Author:wusx
