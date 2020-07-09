@@ -1,0 +1,3 @@
+com.wusx.thinkingindubbo.spi.HelloSpiService=\
+com.wusx.thinkingindubbo.spi.HelloSpiServiceImpl1,\
+com.wusx.thinkingindubbo.spi.HelloSpiServiceImpl2
