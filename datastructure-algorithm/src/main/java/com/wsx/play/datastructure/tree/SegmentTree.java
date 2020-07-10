@@ -60,6 +60,38 @@ public class SegmentTree<E> {
     return data[index];
   }
 
+  public E query(int queryL, int queryR) {
+    if (queryL > queryR || queryL < 0 || queryL >= data.length ||
+        queryR < 0 || queryR >= data.length) {
+      throw new IllegalArgumentException("index is illegal.");
+    }
+    return query(0, 0, data.length - 1, queryL, queryR);
+  }
+
+  /**
+   *@Description 在以treeIndex为根的线段树中[l...r]的范围里，搜索[queryL...queryR]的值.
+   *@Author wusx
+   *@Date 下午10:32 2020/7/10
+   *@Modified
+   */
+  private E query(int treeIndex, int l, int r, int queryL, int queryR) {
+    if (l == queryL && r == queryR) {
+      return tree[treeIndex];
+    }
+    int mid = l + (r - l) / 2;
+    int leftChildIndex = leftChildIndex(treeIndex);
+    int rightChildIndex = rightChildIndex(treeIndex);
+    if (queryL >= mid + 1) {
+      return query(rightChildIndex, mid + 1, r, queryL, queryR);
+    } else if (queryR <= mid) {
+      return query(leftChildIndex, l, mid, queryL, queryR);
+    } else {
+      E left = query(leftChildIndex, l, mid, queryL, mid);
+      E right = query(rightChildIndex, mid + 1, r, mid + 1, queryR);
+      return merger.merge(left, right);
+    }
+  }
+
   @Override
   public String toString() {
     return Arrays.toString(tree);
@@ -69,6 +101,9 @@ public class SegmentTree<E> {
     Integer[] nums = new Integer[]{-2, 0, 3, -5, 2, -1};
     SegmentTree<Integer> tree = new SegmentTree<>(nums, (a, b) -> a + b);
     System.out.println(tree);
+    System.out.println(tree.query(0, 2));
+    System.out.println(tree.query(2, 5));
+    System.out.println(tree.query(0, 5));
   }
 
 }
