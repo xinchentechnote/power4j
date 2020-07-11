@@ -60,6 +60,30 @@ public class SegmentTree<E> {
     return data[index];
   }
 
+  public void set(int index, E e) {
+    if (0 > index || index >= data.length) {
+      throw new IllegalArgumentException("index is illegal.");
+    }
+    data[index] = e;
+    set(0, 0, data.length, index, e);
+  }
+
+  private void set(int treeIndex, int l, int r, int index, E e) {
+    if (l == r) {
+      tree[treeIndex] = e;
+      return;
+    }
+    int mid = l + (r - l) / 2;
+    int leftChildIndex = leftChildIndex(treeIndex);
+    int rightChildIndex = rightChildIndex(treeIndex);
+    if (index >= mid + 1) {
+      set(rightChildIndex, mid + 1, r, index, e);
+    } else {
+      set(leftChildIndex, l, mid, index, e);
+    }
+    tree[treeIndex] = merger.merge(tree[leftChildIndex], tree[rightChildIndex]);
+  }
+
   public E query(int queryL, int queryR) {
     if (queryL > queryR || queryL < 0 || queryL >= data.length ||
         queryR < 0 || queryR >= data.length) {
