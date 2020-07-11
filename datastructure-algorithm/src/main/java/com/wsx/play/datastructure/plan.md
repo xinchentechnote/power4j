@@ -9,4 +9,14 @@
         线段树更新
         binary index tree
     10-1、TrieTree
+    10-7、其他LeetCode话题
+        压缩字典树
+        Ternary Search Trie
+        后缀树
+        子串查询：KMP、Boyer-Moore、Rabin-Karp
+        文件压缩：哈夫曼树
+        模式匹配
+        编译原理
+        DNA
+    11-2、并查集
         
