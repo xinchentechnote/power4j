@@ -5,17 +5,18 @@ import java.util.Queue;
 import java.util.Stack;
 
 /**
- * @Description 二分搜索树.
+ * 红黑树.
+ * @Description
  * @Author:ShangxiuWu
- * @Date: 22:51 2020/6/21.
+ * @Date: 19:25 2020/7/12.
  * @Modified By:
  */
-public class BSTree<K extends Comparable<K>, V> {
+public class RBTree<K extends Comparable<K>, V> {
 
 
   public static void main(String[] args) {
 
-    BSTree<Integer, Integer> bst = new BSTree<>();
+    RBTree<Integer, Integer> bst = new RBTree<>();
     int[] data = new int[]{5, 3, 6, 8, 4, 2};
     for (int i = 0; i < data.length; i++) {
       bst.add(data[i], data[i]);
@@ -34,12 +35,12 @@ public class BSTree<K extends Comparable<K>, V> {
 
   private int size;
 
-  public BSTree() {
+  public RBTree() {
     this.root = null;
     this.size = 0;
   }
 
-  public BSTree(Node<K, V> root) {
+  public RBTree(Node<K, V> root) {
     this.root = root;
     this.size++;
   }
@@ -55,6 +56,7 @@ public class BSTree<K extends Comparable<K>, V> {
 
   public void add(K key, V value) {
     this.root = add(root, key, value);
+    this.root.color = Node.RED;
   }
 
   //将元素插入指定节点中
@@ -331,10 +333,14 @@ public class BSTree<K extends Comparable<K>, V> {
   }
 
 
-  public class Node<K extends Comparable<K>, V> {
+  private class Node<K extends Comparable<K>, V> {
+
+    private static final boolean RED = true;
+    private static final boolean BLACK = false;
 
     private K key;
     private V value;
+    private boolean color;
     private Node<K, V> left;
     private Node<K, V> right;
 
@@ -343,6 +349,7 @@ public class BSTree<K extends Comparable<K>, V> {
       this.value = value;
       this.left = null;
       this.right = null;
+      this.color = RED;
     }
 
     public Node(K key, V value, Node<K, V> left, Node<K, V> right) {
@@ -350,6 +357,11 @@ public class BSTree<K extends Comparable<K>, V> {
       this.value = value;
       this.left = left;
       this.right = right;
+      this.color = RED;
+    }
+
+    public boolean isRed() {
+      return this.color;
     }
   }
 
