@@ -12,15 +12,15 @@ import java.util.Stack;
  * @Date: 22:51 2020/6/21.
  * @Modified By:
  */
-public class AVLTree<T extends Comparable<T>> {
+public class AVLTree<K extends Comparable<K>, V> {
 
 
   public static void main(String[] args) {
 
-    AVLTree<Integer> bst = new AVLTree<>();
+    AVLTree<Integer, Integer> bst = new AVLTree<>();
     int[] data = new int[]{1, 2, 3, 4, 5, 6, 10, 9, 8, 7};
     for (int i = 0; i < data.length; i++) {
-      bst.add(data[i]);
+      bst.add(data[i], data[i]);
       //System.out.println(bst.isBalanced());
     }
     bst.remove(5);
@@ -34,7 +34,7 @@ public class AVLTree<T extends Comparable<T>> {
 
   }
 
-  private Node<T> rootNode;
+  private Node<K, V> rootNode;
 
   private int size;
 
@@ -43,7 +43,7 @@ public class AVLTree<T extends Comparable<T>> {
     this.size = 0;
   }
 
-  public AVLTree(Node<T> rootNode) {
+  public AVLTree(Node<K, V> rootNode) {
     this.rootNode = rootNode;
     this.size++;
   }
@@ -56,13 +56,41 @@ public class AVLTree<T extends Comparable<T>> {
     return this.size == 0;
   }
 
+  public V get(K key) {
+    Node<K, V> node = getNode(rootNode, key);
+    if (null != node) {
+      return node.value;
+    }
+    return null;
+  }
+
+  private Node<K, V> getNode(Node<K, V> node, K key) {
+    if (null == node) {
+      return null;
+    }
+    if (key.compareTo(node.key) == 0) {
+      return node;
+    } else if (key.compareTo(node.key) > 0) {
+      return getNode(node.right, key);
+    } else {
+      return getNode(node.left, key);
+    }
+  }
+
+  public void set(K key, V value) {
+    Node<K, V> node = getNode(rootNode, key);
+    if (null != node) {
+      node.value = value;
+    }
+  }
+
   /**
    *@Description 获取节点的高度.
    *@Author wusx
    *@Date 10:32 2020/7/12
    *@Modified
    */
-  private int getHeight(Node<T> node) {
+  private int getHeight(Node<K, V> node) {
     if (null == node) {
       return 0;
     }
@@ -75,24 +103,24 @@ public class AVLTree<T extends Comparable<T>> {
    *@Date 10:34 2020/7/12
    *@Modified
    */
-  private int getBalanceFactor(Node<T> node) {
+  private int getBalanceFactor(Node<K, V> node) {
     return getHeight(node.left) - getHeight(node.right);
   }
 
-  public void add(T value) {
-    this.rootNode = add(rootNode, value);
+  public void add(K key, V value) {
+    this.rootNode = add(rootNode, key, value);
   }
 
   //将元素插入指定节点中
-  private Node<T> add(Node<T> node, T value) {
+  private Node<K, V> add(Node<K, V> node, K key, V value) {
     if (null == node) {
       size++;
-      return new Node<>(value);
+      return new Node<>(key, value);
     }
-    if (value.compareTo(node.value) < 0) {
-      node.left = add(node.left, value);
-    } else if (value.compareTo(node.value) > 0) {
-      node.right = add(node.right, value);
+    if (key.compareTo(node.key) < 0) {
+      node.left = add(node.left, key, value);
+    } else if (key.compareTo(node.key) > 0) {
+      node.right = add(node.right, key, value);
     }
     //更新高度值
     node.height = 1 + Math.max(getHeight(node.left), getHeight(node.right));
@@ -167,7 +195,7 @@ public class AVLTree<T extends Comparable<T>> {
 
   //判断是否为二分搜索树
   public boolean isBST() {
-    ArrayList<T> list = new ArrayList<>();
+    ArrayList<K> list = new ArrayList<>();
     inOrder(rootNode, list);
     for (int i = 1; i < list.size(); i++) {
       if (list.get(i - 1).compareTo(list.get(i)) > 0) {
@@ -177,12 +205,12 @@ public class AVLTree<T extends Comparable<T>> {
     return true;
   }
 
-  private void inOrder(Node<T> node, List<T> list) {
+  private void inOrder(Node<K, V> node, List<K> list) {
     if (null == node) {
       return;
     }
     inOrder(node.left, list);
-    list.add(node.value);
+    list.add(node.key);
     inOrder(node.right, list);
   }
 
@@ -191,7 +219,7 @@ public class AVLTree<T extends Comparable<T>> {
   }
 
   //判断平衡
-  private boolean isBalanced(Node<T> node) {
+  private boolean isBalanced(Node<K, V> node) {
     if (null == node) {
       return true;
     }
@@ -202,23 +230,23 @@ public class AVLTree<T extends Comparable<T>> {
   }
 
   //查询
-  public boolean contains(T value) {
-    return contains(this.rootNode, value);
+  public boolean contains(K key) {
+    return contains(this.rootNode, key);
   }
 
-  private boolean contains(Node<T> node, T value) {
+  private boolean contains(Node<K, V> node, K key) {
     //终止条件
     if (null == node) {
       return false;
     }
-    if (value.equals(node.value)) {
+    if (key.equals(node.key)) {
       return true;
     }
     //递归调用
-    if (value.compareTo(node.value) < 0) {
-      return contains(node.left, value);
+    if (key.compareTo(node.key) < 0) {
+      return contains(node.left, key);
     } else {
-      return contains(node.right, value);
+      return contains(node.right, key);
     }
   }
 
@@ -234,7 +262,7 @@ public class AVLTree<T extends Comparable<T>> {
     stack.push(rootNode);
     while (!stack.empty()) {
       Node pop = stack.pop();
-      System.out.print(pop.value + " ");
+      System.out.print(pop.key + " ");
       if (null != pop.right) {
         stack.push(pop.right);
       }
@@ -246,11 +274,11 @@ public class AVLTree<T extends Comparable<T>> {
   }
 
   //前序遍历：打印
-  private void preOrder(Node<T> node) {
+  private void preOrder(Node<K, V> node) {
     if (null == node) {
       return;
     }
-    System.out.print(node.value + " ");
+    System.out.print(node.key + " ");
     preOrder(node.left);
     preOrder(node.right);
   }
@@ -262,12 +290,12 @@ public class AVLTree<T extends Comparable<T>> {
     System.out.println();
   }
 
-  private void inOrder(Node<T> node) {
+  private void inOrder(Node<K, V> node) {
     if (null == node) {
       return;
     }
     inOrder(node.left);
-    System.out.print(node.value + " ");
+    System.out.print(node.key + " ");
     inOrder(node.right);
   }
 
@@ -277,13 +305,13 @@ public class AVLTree<T extends Comparable<T>> {
     System.out.println();
   }
 
-  private void postOrder(Node<T> node) {
+  private void postOrder(Node<K, V> node) {
     if (null == node) {
       return;
     }
     postOrder(node.left);
     postOrder(node.right);
-    System.out.print(node.value + " ");
+    System.out.print(node.key + " ");
   }
 
   /**
@@ -303,7 +331,7 @@ public class AVLTree<T extends Comparable<T>> {
       if (null != remove.right) {
         queue.add(remove.right);
       }
-      System.out.print(remove.value + " ");
+      System.out.print(remove.key + " ");
     }
     System.out.println();
   }
@@ -314,29 +342,29 @@ public class AVLTree<T extends Comparable<T>> {
    *@Date 14:25 2020/7/5
    *@Modified
    */
-  public T minimum() {
+  public K minimum() {
     if (this.isEmpty()) {
       throw new IllegalArgumentException("BST is empty");
     }
-    return minimum(rootNode).value;
+    return minimum(rootNode).key;
   }
 
-  private Node<T> minimum(Node<T> node) {
+  private Node<K, V> minimum(Node<K, V> node) {
     if (null == node || null == node.left) {
       return node;
     }
     return minimum(node.left);
   }
 
-  public T removeMin() {
-    T t = minimum();
+  public K removeMin() {
+    K k = minimum();
     rootNode = removeMin(rootNode);
-    return t;
+    return k;
   }
 
-  private Node<T> removeMin(Node<T> node) {
+  private Node<K, V> removeMin(Node<K, V> node) {
     if (null == node.left) {
-      Node<T> right = node.right;
+      Node<K, V> right = node.right;
       node.right = null;
       size--;
       return right;
@@ -351,14 +379,14 @@ public class AVLTree<T extends Comparable<T>> {
    *@Date 14:24 2020/7/5
    *@Modified
    */
-  public T maximum() {
+  public K maximum() {
     if (this.isEmpty()) {
       throw new IllegalArgumentException("BST is empty");
     }
-    return maximum(rootNode).value;
+    return maximum(rootNode).key;
   }
 
-  private Node<T> maximum(Node<T> node) {
+  private Node<K, V> maximum(Node<K, V> node) {
     if (null == node.right) {
       return node;
     }
@@ -371,15 +399,15 @@ public class AVLTree<T extends Comparable<T>> {
    *@Date 14:48 2020/7/5
    *@Modified
    */
-  public T removeMax() {
-    T t = maximum();
+  public K removeMax() {
+    K k = maximum();
     rootNode = removeMax(rootNode);
-    return t;
+    return k;
   }
 
-  private Node<T> removeMax(Node<T> node) {
+  private Node<K, V> removeMax(Node<K, V> node) {
     if (null == node.right) {
-      Node<T> left = node.left;
+      Node<K, V> left = node.left;
       node.left = null;
       size--;
       return left;
@@ -394,19 +422,24 @@ public class AVLTree<T extends Comparable<T>> {
    *@Date 14:49 2020/7/5
    *@Modified
    */
-  public void remove(T value) {
-    rootNode = remove(rootNode, value);
+  public V remove(K key) {
+    Node<K, V> node = getNode(rootNode, key);
+    if (null != node) {
+      rootNode = remove(rootNode, key);
+      return node.value;
+    }
+    return null;
   }
 
-  private Node<T> remove(Node<T> node, T value) {
+  private Node<K, V> remove(Node<K, V> node, K value) {
     if (null == node) {
       return null;
     }
-    Node<T> result;
-    if (value.compareTo(node.value) > 0) {
+    Node<K, V> result;
+    if (value.compareTo(node.key) > 0) {
       node.right = remove(node.right, value);
       result = node;
-    } else if (value.compareTo(node.value) < 0) {
+    } else if (value.compareTo(node.key) < 0) {
       node.left = remove(node.left, value);
       result = node;
     } else {
@@ -422,7 +455,7 @@ public class AVLTree<T extends Comparable<T>> {
       } else {
 
         result = minimum(node.right);
-        result.right = remove(node.right, result.value);
+        result.right = remove(node.right, result.key);
         result.left = node.left;
         node.left = node.right = null;
       }
@@ -467,12 +500,12 @@ public class AVLTree<T extends Comparable<T>> {
     return builder.toString();
   }
 
-  private void generateBSTString(Node<T> node, int depth, StringBuilder builder) {
+  private void generateBSTString(Node<K, V> node, int depth, StringBuilder builder) {
     if (null == node) {
       builder.append(generateDepthString(depth) + "null\n");
       return;
     }
-    builder.append(generateDepthString(depth) + node.value + "\n");
+    builder.append(generateDepthString(depth) + node.key + "\n");
     generateBSTString(node.left, depth + 1, builder);
     generateBSTString(node.right, depth + 1, builder);
   }
@@ -486,21 +519,24 @@ public class AVLTree<T extends Comparable<T>> {
   }
 
 
-  public class Node<T extends Comparable<T>> {
+  public class Node<K extends Comparable<K>, V> {
 
-    private T value;
-    private Node<T> left;
-    private Node<T> right;
+    private K key;
+    private V value;
+    private Node<K, V> left;
+    private Node<K, V> right;
     private int height;
 
-    public Node(T value) {
+    public Node(K key, V value) {
+      this.key = key;
       this.value = value;
       this.left = null;
       this.right = null;
       this.height = 1;
     }
 
-    public Node(T value, Node<T> left, Node<T> right) {
+    public Node(K key, Node<K, V> left, Node<K, V> right) {
+      this.key = key;
       this.value = value;
       this.left = left;
       this.right = right;

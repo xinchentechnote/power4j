@@ -75,9 +75,11 @@ public class BSTMap<K extends Comparable<K>, V> implements Map<K, V> {
 
   private Node removeNode(Node node, K key) {
     if (key.compareTo(node.key) < 0) {
-      return removeNode(node.left, key);
+      node.left = removeNode(node.left, key);
+      return node;
     } else if (key.compareTo(node.key) > 0) {
-      return removeNode(node.right, key);
+      node.right = removeNode(node.right, key);
+      return node;
     } else {
       if (null == node.left) {
         Node right = node.right;
