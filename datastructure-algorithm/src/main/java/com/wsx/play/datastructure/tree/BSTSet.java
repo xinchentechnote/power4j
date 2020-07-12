@@ -20,7 +20,7 @@ public class BSTSet<E extends Comparable<E>> implements Set<E> {
     System.out.println(set.contains("hw"));
   }
 
-  private BSTree<E> bst;
+  private BSTree<E, Object> bst;
 
   public BSTSet() {
     this.bst = new BSTree<>();
@@ -28,7 +28,7 @@ public class BSTSet<E extends Comparable<E>> implements Set<E> {
 
   @Override
   public void add(E e) {
-    bst.add(e);
+    bst.add(e, null);
   }
 
   @Override

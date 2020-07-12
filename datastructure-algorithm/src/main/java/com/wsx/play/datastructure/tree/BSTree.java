@@ -10,15 +10,15 @@ import java.util.Stack;
  * @Date: 22:51 2020/6/21.
  * @Modified By:
  */
-public class BSTree<T extends Comparable<T>> {
+public class BSTree<K extends Comparable<K>, V> {
 
 
   public static void main(String[] args) {
 
-    BSTree<Integer> bst = new BSTree<>();
+    BSTree<Integer, Integer> bst = new BSTree<>();
     int[] data = new int[]{5, 3, 6, 8, 4, 2};
     for (int i = 0; i < data.length; i++) {
-      bst.add(data[i]);
+      bst.add(data[i], data[i]);
     }
     //排序
     bst.remove(2);
@@ -30,7 +30,7 @@ public class BSTree<T extends Comparable<T>> {
 
   }
 
-  private BSTNode<T> rootNode;
+  private BSTNode<K, V> rootNode;
 
   private int size;
 
@@ -39,7 +39,7 @@ public class BSTree<T extends Comparable<T>> {
     this.size = 0;
   }
 
-  public BSTree(BSTNode<T> rootNode) {
+  public BSTree(BSTNode<K, V> rootNode) {
     this.rootNode = rootNode;
     this.size++;
   }
@@ -53,42 +53,42 @@ public class BSTree<T extends Comparable<T>> {
   }
 
 
-  public void add(T value) {
-    this.rootNode = add(rootNode, value);
+  public void add(K key, V value) {
+    this.rootNode = add(rootNode, key, value);
   }
 
   //将元素插入指定节点中
-  private BSTNode<T> add(BSTNode<T> node, T value) {
+  private BSTNode<K, V> add(BSTNode<K, V> node, K key, V value) {
     if (null == node) {
       size++;
-      return new BSTNode<>(value);
+      return new BSTNode<>(key, value);
     }
-    if (value.compareTo(node.value) < 0) {
-      node.left = add(node.left, value);
-    } else if (value.compareTo(node.value) > 0) {
-      node.right = add(node.right, value);
+    if (key.compareTo(node.key) < 0) {
+      node.left = add(node.left, key, value);
+    } else if (key.compareTo(node.key) > 0) {
+      node.right = add(node.right, key, value);
     }
     return node;
   }
 
   //查询
-  public boolean contains(T value) {
-    return contains(this.rootNode, value);
+  public boolean contains(K key) {
+    return contains(this.rootNode, key);
   }
 
-  private boolean contains(BSTNode<T> node, T value) {
+  private boolean contains(BSTNode<K, V> node, K key) {
     //终止条件
     if (null == node) {
       return false;
     }
-    if (value.equals(node.value)) {
+    if (key.equals(node.key)) {
       return true;
     }
     //递归调用
-    if (value.compareTo(node.value) < 0) {
-      return contains(node.left, value);
+    if (key.compareTo(node.key) < 0) {
+      return contains(node.left, key);
     } else {
-      return contains(node.right, value);
+      return contains(node.right, key);
     }
   }
 
@@ -104,7 +104,7 @@ public class BSTree<T extends Comparable<T>> {
     stack.push(rootNode);
     while (!stack.empty()) {
       BSTNode pop = stack.pop();
-      System.out.print(pop.value + " ");
+      System.out.print(pop.key + " ");
       if (null != pop.right) {
         stack.push(pop.right);
       }
@@ -116,11 +116,11 @@ public class BSTree<T extends Comparable<T>> {
   }
 
   //前序遍历：打印
-  private void preOrder(BSTNode<T> node) {
+  private void preOrder(BSTNode<K, V> node) {
     if (null == node) {
       return;
     }
-    System.out.print(node.value + " ");
+    System.out.print(node.key + " ");
     preOrder(node.left);
     preOrder(node.right);
   }
@@ -132,12 +132,12 @@ public class BSTree<T extends Comparable<T>> {
     System.out.println();
   }
 
-  private void inOrder(BSTNode<T> node) {
+  private void inOrder(BSTNode<K, V> node) {
     if (null == node) {
       return;
     }
     inOrder(node.left);
-    System.out.print(node.value + " ");
+    System.out.print(node.key + " ");
     inOrder(node.right);
   }
 
@@ -147,13 +147,13 @@ public class BSTree<T extends Comparable<T>> {
     System.out.println();
   }
 
-  private void postOrder(BSTNode<T> node) {
+  private void postOrder(BSTNode<K, V> node) {
     if (null == node) {
       return;
     }
     postOrder(node.left);
     postOrder(node.right);
-    System.out.print(node.value + " ");
+    System.out.print(node.key + " ");
   }
 
   /**
@@ -173,7 +173,7 @@ public class BSTree<T extends Comparable<T>> {
       if (null != remove.right) {
         queue.add(remove.right);
       }
-      System.out.print(remove.value + " ");
+      System.out.print(remove.key + " ");
     }
     System.out.println();
   }
@@ -184,29 +184,29 @@ public class BSTree<T extends Comparable<T>> {
    *@Date 14:25 2020/7/5
    *@Modified
    */
-  public T minimum() {
+  public K minimum() {
     if (this.isEmpty()) {
       throw new IllegalArgumentException("BST is empty");
     }
-    return minimum(rootNode).value;
+    return minimum(rootNode).key;
   }
 
-  private BSTNode<T> minimum(BSTNode<T> node) {
+  private BSTNode<K, V> minimum(BSTNode<K, V> node) {
     if (null == node.left) {
       return node;
     }
     return minimum(node.left);
   }
 
-  public T removeMin() {
-    T t = minimum();
+  public K removeMin() {
+    K k = minimum();
     rootNode = removeMin(rootNode);
-    return t;
+    return k;
   }
 
-  private BSTNode<T> removeMin(BSTNode<T> node) {
+  private BSTNode<K, V> removeMin(BSTNode<K, V> node) {
     if (null == node.left) {
-      BSTNode<T> right = node.right;
+      BSTNode<K, V> right = node.right;
       node.right = null;
       size--;
       return right;
@@ -221,14 +221,14 @@ public class BSTree<T extends Comparable<T>> {
    *@Date 14:24 2020/7/5
    *@Modified
    */
-  public T maximum() {
+  public K maximum() {
     if (this.isEmpty()) {
       throw new IllegalArgumentException("BST is empty");
     }
-    return maximum(rootNode).value;
+    return maximum(rootNode).key;
   }
 
-  private BSTNode<T> maximum(BSTNode<T> node) {
+  private BSTNode<K, V> maximum(BSTNode<K, V> node) {
     if (null == node.right) {
       return node;
     }
@@ -241,15 +241,15 @@ public class BSTree<T extends Comparable<T>> {
    *@Date 14:48 2020/7/5
    *@Modified
    */
-  public T removeMax() {
-    T t = maximum();
+  public K removeMax() {
+    K k = maximum();
     rootNode = removeMax(rootNode);
-    return t;
+    return k;
   }
 
-  private BSTNode<T> removeMax(BSTNode<T> node) {
+  private BSTNode<K, V> removeMax(BSTNode<K, V> node) {
     if (null == node.right) {
-      BSTNode<T> left = node.left;
+      BSTNode<K, V> left = node.left;
       node.left = null;
       size--;
       return left;
@@ -264,34 +264,34 @@ public class BSTree<T extends Comparable<T>> {
    *@Date 14:49 2020/7/5
    *@Modified
    */
-  public void remove(T value) {
-    rootNode = remove(rootNode, value);
+  public void remove(K key) {
+    rootNode = remove(rootNode, key);
   }
 
-  private BSTNode<T> remove(BSTNode<T> node, T value) {
+  private BSTNode<K, V> remove(BSTNode<K, V> node, K key) {
     if (null == node) {
       return null;
     }
-    if (value.compareTo(node.value) > 0) {
-      node.right = remove(node.right, value);
+    if (key.compareTo(node.key) > 0) {
+      node.right = remove(node.right, key);
       return node;
-    } else if (value.compareTo(node.value) < 0) {
+    } else if (key.compareTo(node.key) < 0) {
 
-      node.left = remove(node.left, value);
+      node.left = remove(node.left, key);
       return node;
     } else {
 
-      if (null==node.left){
-        BSTNode<T> right = node.right;
+      if (null == node.left) {
+        BSTNode<K, V> right = node.right;
         node.right = null;
         size--;
         return right;
       }
 
-      if (null==node.right){
-        BSTNode<T> left = node.left;
+      if (null == node.right) {
+        BSTNode<K, V> left = node.left;
         node.left = null;
-        size --;
+        size--;
         return left;
       }
 
@@ -312,12 +312,12 @@ public class BSTree<T extends Comparable<T>> {
     return builder.toString();
   }
 
-  private void generateBSTString(BSTNode<T> node, int depth, StringBuilder builder) {
+  private void generateBSTString(BSTNode<K, V> node, int depth, StringBuilder builder) {
     if (null == node) {
       builder.append(generateDepthString(depth) + "null\n");
       return;
     }
-    builder.append(generateDepthString(depth) + node.value + "\n");
+    builder.append(generateDepthString(depth) + node.key + "\n");
     generateBSTString(node.left, depth + 1, builder);
     generateBSTString(node.right, depth + 1, builder);
   }
@@ -331,26 +331,25 @@ public class BSTree<T extends Comparable<T>> {
   }
 
 
-  public class BSTNode<T extends Comparable<T>> {
+  public class BSTNode<K extends Comparable<K>, V> {
 
-    private T value;
-    private BSTNode<T> left;
-    private BSTNode<T> right;
-    private BSTNode<T> parent;
+    private K key;
+    private V value;
+    private BSTNode<K, V> left;
+    private BSTNode<K, V> right;
 
-    public BSTNode(T value) {
+    public BSTNode(K key, V value) {
+      this.key = key;
       this.value = value;
       this.left = null;
       this.right = null;
-      this.parent = null;
     }
 
-    public BSTNode(T value, BSTNode<T> left, BSTNode<T> right,
-        BSTNode<T> parent) {
+    public BSTNode(K key, V value, BSTNode<K, V> left, BSTNode<K, V> right) {
+      this.key = key;
       this.value = value;
       this.left = left;
       this.right = right;
-      this.parent = parent;
     }
   }
 
