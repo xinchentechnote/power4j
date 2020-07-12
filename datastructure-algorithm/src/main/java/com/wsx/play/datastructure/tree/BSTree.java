@@ -20,15 +20,9 @@ public class BSTree<T extends Comparable<T>> {
     for (int i = 0; i < data.length; i++) {
       bst.add(data[i]);
     }
-    System.out.println(bst);
-    bst.preOrder();
-    bst.preOrderNR();
     //排序
+    bst.remove(2);
     bst.inOrder();
-    bst.remove(5);
-    bst.postOrder();
-    System.out.println("---------层序遍历--------");
-    bst.levelOrder();
     while (!bst.isEmpty()) {
       System.out.print(bst.removeMax() + " ");
     }
@@ -279,10 +273,28 @@ public class BSTree<T extends Comparable<T>> {
       return null;
     }
     if (value.compareTo(node.value) > 0) {
-      return remove(node.right, value);
+      node.right = remove(node.right, value);
+      return node;
     } else if (value.compareTo(node.value) < 0) {
-      return remove(node.left, value);
+
+      node.left = remove(node.left, value);
+      return node;
     } else {
+
+      if (null==node.left){
+        BSTNode<T> right = node.right;
+        node.right = null;
+        size--;
+        return right;
+      }
+
+      if (null==node.right){
+        BSTNode<T> left = node.left;
+        node.left = null;
+        size --;
+        return left;
+      }
+
       BSTNode newNode = minimum(node.right);
       newNode.right = removeMin(node.right);
       newNode.left = node.left;
