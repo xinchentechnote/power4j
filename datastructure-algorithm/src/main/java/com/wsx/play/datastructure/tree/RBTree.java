@@ -60,6 +60,13 @@ public class RBTree<K extends Comparable<K>, V> {
     this.root.color = Node.BLACK;
   }
 
+  private boolean isRed(Node<K, V> node) {
+    if (null == node) {
+      return Node.BLACK;
+    }
+    return node.color;
+  }
+
   //将元素插入指定节点中
   private Node<K, V> add(Node<K, V> node, K key, V value) {
     if (null == node) {
@@ -75,15 +82,15 @@ public class RBTree<K extends Comparable<K>, V> {
     }
     //红黑树，维护黑平衡
     //左旋转
-    if (node.right.isRed() && !node.left.isRed()) {
+    if (isRed(node.right) && !isRed(node.left)) {
       node = leftRotate(node);
     }
     //右旋转
-    if (node.left.isRed() && node.left.left.isRed()) {
+    if (isRed(node.left) && isRed(node.left.left)) {
       node = rightRotate(node);
     }
     //颜色翻转
-    if (node.left.isRed() && node.right.isRed()) {
+    if (isRed(node.left) && isRed(node.right)) {
       flipColors(node);
     }
 
@@ -123,7 +130,7 @@ public class RBTree<K extends Comparable<K>, V> {
   private Node<K, V> rightRotate(Node<K, V> node) {
     Node<K, V> x = node.left;
 
-    node.left=x.right;
+    node.left = x.right;
     x.right = node;
 
     x.color = node.color;
