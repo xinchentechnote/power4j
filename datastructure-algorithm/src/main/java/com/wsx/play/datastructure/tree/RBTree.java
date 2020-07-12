@@ -56,21 +56,86 @@ public class RBTree<K extends Comparable<K>, V> {
 
   public void add(K key, V value) {
     this.root = add(root, key, value);
-    this.root.color = Node.RED;
+    //最终根节点为黑色节点
+    this.root.color = Node.BLACK;
   }
 
   //将元素插入指定节点中
   private Node<K, V> add(Node<K, V> node, K key, V value) {
     if (null == node) {
       size++;
-      return new Node<>(key, value);
+      return new Node<>(key, value);//默认插入红色节点
     }
     if (key.compareTo(node.key) < 0) {
       node.left = add(node.left, key, value);
     } else if (key.compareTo(node.key) > 0) {
       node.right = add(node.right, key, value);
+    } else {
+      node.value = value;
     }
+    //红黑树，维护黑平衡
+    //左旋转
+    if (node.right.isRed() && !node.left.isRed()) {
+      node = leftRotate(node);
+    }
+    //右旋转
+    if (node.left.isRed() && node.left.left.isRed()) {
+      node = rightRotate(node);
+    }
+    //颜色翻转
+    if (node.left.isRed() && node.right.isRed()) {
+      flipColors(node);
+    }
+
     return node;
+  }
+
+  /**  左旋转
+   *     node            x
+   *    /   \           /  \
+   *   T1    x        node  T3
+   *        /  \      /   \
+   *       T2   T3   T1    T2
+   * @param node
+   * @return
+   */
+  private Node<K, V> leftRotate(Node<K, V> node) {
+    Node<K, V> x = node.right;
+
+    node.right = x.left;
+    x.left = node;
+
+    x.color = node.color;
+    node.color = Node.RED;
+
+    return x;
+  }
+
+  /**  右旋转
+   *     node             x
+   *    /   \           /  \
+   *   x    T3        T1   node
+   *  /  \                 /  \
+   * T1  T2              T2   T3
+   * @param node
+   * @return
+   */
+  private Node<K, V> rightRotate(Node<K, V> node) {
+    Node<K, V> x = node.left;
+
+    node.left=x.right;
+    x.right = node;
+
+    x.color = node.color;
+    node.color = Node.RED;
+    return x;
+  }
+
+  //颜色翻转
+  private void flipColors(Node<K, V> node) {
+    node.color = Node.RED;
+    node.left.color = Node.BLACK;
+    node.right.color = Node.BLACK;
   }
 
   //查询

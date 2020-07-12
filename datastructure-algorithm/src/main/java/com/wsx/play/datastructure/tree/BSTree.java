@@ -67,6 +67,8 @@ public class BSTree<K extends Comparable<K>, V> {
       node.left = add(node.left, key, value);
     } else if (key.compareTo(node.key) > 0) {
       node.right = add(node.right, key, value);
+    } else {
+      node.value = value;
     }
     return node;
   }

@@ -121,6 +121,8 @@ public class AVLTree<K extends Comparable<K>, V> {
       node.left = add(node.left, key, value);
     } else if (key.compareTo(node.key) > 0) {
       node.right = add(node.right, key, value);
+    } else {
+      node.value = value;
     }
     //更新高度值
     node.height = 1 + Math.max(getHeight(node.left), getHeight(node.right));
