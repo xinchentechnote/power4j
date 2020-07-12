@@ -30,8 +30,10 @@ public class Q387FirstUniqueCharacterInAString{
         // TO TEST
         System.out.println(solution.firstUniqChar("leetcode"));
         System.out.println(solution.firstUniqChar1("leetcode"));
+        System.out.println(solution.firstUniqChar2("leetcode"));
         System.out.println(solution.firstUniqChar("loveleetcode"));
         System.out.println(solution.firstUniqChar1("loveleetcode"));
+        System.out.println(solution.firstUniqChar2("loveleetcode"));
     }
 static
     //leetcode submit region begin(Prohibit modification and deletion)
