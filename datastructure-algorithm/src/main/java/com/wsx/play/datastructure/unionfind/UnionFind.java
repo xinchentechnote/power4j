@@ -1,4 +1,4 @@
-package com.wsx.play.datastructure.tree;
+package com.wsx.play.datastructure.unionfind;
 
 /**
  * @Description 并查集.
