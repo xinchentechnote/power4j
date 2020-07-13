@@ -100,13 +100,11 @@ public class LampControl {
   public static void main(String[] args) {
     BitMap map = new BitMap(7);
     System.out.println(map.toString());
-    map.invert(0);
     map.invert(1);
     map.invert(2);
     map.invert(2);
     map.invert(3);
     map.invert(4);
-    map.invert(7);
     System.out.println(map.toString());
     map.print();
   }
