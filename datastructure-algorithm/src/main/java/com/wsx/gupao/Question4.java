@@ -24,7 +24,7 @@ public class Question4 {
     for (int i = 1; i <= count; i++) {
       for (int j = 1; j < count; j++) {
         if (j % i == 0) {
-          System.out.println(map.not(j));
+          map.not(j);
         }
       }
     }

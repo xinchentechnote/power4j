@@ -71,6 +71,19 @@ public class LampControl {
       return (data[byteIndex] & (1 << (7 - bitIndex))) != 0;
     }
 
+    public int countOne() {
+      int count = 0;
+      for (int i = 0; i < data.length; i++) {
+        byte datum = data[i];
+        for (int j = 0; j < 8; j++) {
+          if ((datum & (1 << (7 - j))) != 0) {
+            count++;
+          }
+        }
+      }
+      return count;
+    }
+
     public void print() {
       for (int i = 0; i < data.length; i++) {
         byte datum = data[i];
@@ -107,5 +120,18 @@ public class LampControl {
     map.invert(4);
     System.out.println(map.toString());
     map.print();
+    System.out.println(map.countOne());
+    System.out.println("----------------------------");
+    int count = 2018;
+    BitMap bitMap = new BitMap(count);
+    for (int i = 1; i < count; i++) {
+      for (int j = 1; j < count; j++) {
+        if (j % i == 0) {
+          bitMap.invert(j);
+        }
+      }
+    }
+    System.out.println("total:"+bitMap.countOne());
+    System.out.println(bitMap.toString());
   }
 }
