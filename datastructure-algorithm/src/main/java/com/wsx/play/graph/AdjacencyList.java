@@ -2,9 +2,7 @@ package com.wsx.play.graph;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -113,6 +111,7 @@ public class AdjacencyList {
     StringBuilder builder = new StringBuilder();
     builder.append("vertex:").append(vertex).append(",edge:").append(edge).append("\n");
     for (int i = 0; i < vertex; i++) {
+      builder.append(i).append(" : ");
       for (int w : adjacency[i]) {
         builder.append(String.format("%d ", w));
       }
