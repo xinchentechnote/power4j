@@ -86,7 +86,7 @@ public class AdjacencyList {
    * @param v
    * @return
    */
-  public LinkedList<Integer> adjacencyVertex(int v) {
+  public Iterable<Integer> adjacencyVertex(int v) {
     validateVertex(v);
     return adjacency[v];
   }
@@ -97,7 +97,8 @@ public class AdjacencyList {
    * @return
    */
   public int degree(int v) {
-    return adjacencyVertex(v).size();
+    validateVertex(v);
+    return adjacency[v].size();
   }
 
   private void validateVertex(int v) {

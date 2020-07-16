@@ -87,7 +87,7 @@ public class AdjacencySet {
    * @param v
    * @return
    */
-  public TreeSet<Integer> adjacencyVertex(int v) {
+  public Iterable<Integer> adjacencyVertex(int v) {
     validateVertex(v);
     return adjacency[v];
   }
@@ -98,7 +98,8 @@ public class AdjacencySet {
    * @return
    */
   public int degree(int v) {
-    return adjacencyVertex(v).size();
+    validateVertex(v);
+    return adjacency[v].size();
   }
 
   private void validateVertex(int v) {
