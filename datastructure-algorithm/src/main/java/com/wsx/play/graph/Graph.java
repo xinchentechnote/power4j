@@ -2,7 +2,6 @@ package com.wsx.play.graph;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.LinkedList;
 import java.util.Scanner;
 import java.util.TreeSet;
 
@@ -12,7 +11,7 @@ import java.util.TreeSet;
  * @Date: 19:24 2020/7/5.
  * @Modified By:
  */
-public class AdjacencySet {
+public class Graph {
 
 
   /**顶点数.*/
@@ -34,7 +33,7 @@ public class AdjacencySet {
    * 构建邻接矩阵
    * @param filePath
    */
-  public AdjacencySet(String filePath) {
+  public Graph(String filePath) {
     File file = new File(filePath);
     try (Scanner scanner = new Scanner(file)) {
       vertex = scanner.nextInt();
@@ -124,7 +123,7 @@ public class AdjacencySet {
 
   public static void main(String[] args) {
     String filePath = "H:\\workspace\\power4j\\datastructure-algorithm\\graph1.txt";
-    AdjacencySet matrix = new AdjacencySet(filePath);
+    Graph matrix = new Graph(filePath);
     System.out.println(matrix);
   }
 }
