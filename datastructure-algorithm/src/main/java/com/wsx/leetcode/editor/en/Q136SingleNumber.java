@@ -58,6 +58,17 @@ public class Q136SingleNumber {
       }
       return 0;
     }
+
+    public int singleNumber1(int[] nums) {
+      int ans =0;
+
+      int len = nums.length;
+      for (int i = 0; i != len; i++) {
+        ans ^= nums[i];
+      }
+
+      return ans;
+    }
   }
 //leetcode submit region end(Prohibit modification and deletion)
 
