@@ -59,8 +59,8 @@ public class GraphBFS {
 
   public static void main(String[] args) {
     Graph g = new Graph("H:\\workspace\\power4j\\datastructure-algorithm\\bfs.txt");
-    GraphBFS dfs = new GraphBFS(g);
-    Iterable<Integer> order = dfs.order();
+    GraphBFS bfs = new GraphBFS(g);
+    Iterable<Integer> order = bfs.order();
     System.out.println(order);
   }
 
