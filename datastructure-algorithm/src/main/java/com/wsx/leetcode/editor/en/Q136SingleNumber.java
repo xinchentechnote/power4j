@@ -42,7 +42,7 @@ public class Q136SingleNumber {
       //leetcode submit region begin(Prohibit modification and deletion)
   class Solution {
 
-    public int singleNumber(int[] nums) {
+    public int singleNumber2(int[] nums) {
       Map<Integer, Integer> map = new HashMap<>();
       for (int i = 0; i < nums.length; i++) {
         int num = nums[i];
@@ -59,7 +59,7 @@ public class Q136SingleNumber {
       return 0;
     }
 
-    public int singleNumber1(int[] nums) {
+    public int singleNumber(int[] nums) {
       int ans =0;
 
       int len = nums.length;
