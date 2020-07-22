@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @Description 深度优先遍历.
+ * @Description 深度优先遍历，环检测.
  * @Author:ShangxiuWu
  * @Date: 20:25 2020/7/22.
  * @Modified By:
