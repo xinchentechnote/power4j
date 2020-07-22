@@ -1,5 +1,6 @@
-package com.wsx.play.graph;
+package com.wsx.play.graph.dfs;
 
+import com.wsx.play.graph.Graph;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;

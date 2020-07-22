@@ -1,4 +1,6 @@
-package com.wsx.play.graph;
+package com.wsx.play.graph.dfs;
+
+import com.wsx.play.graph.Graph;
 
 /**
  * @Description 二分图检测，染色.

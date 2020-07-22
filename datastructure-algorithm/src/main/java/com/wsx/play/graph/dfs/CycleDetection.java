@@ -1,7 +1,6 @@
-package com.wsx.play.graph;
+package com.wsx.play.graph.dfs;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.wsx.play.graph.Graph;
 
 /**
  * @Description 深度优先遍历，环检测.
