@@ -21,6 +21,7 @@ public class Graph {
   /**矩阵.*/
   private TreeSet<Integer>[] adjacency;
 
+
   public int getVertex() {
     return vertex;
   }
@@ -101,7 +102,7 @@ public class Graph {
     return adjacency[v].size();
   }
 
-  private void validateVertex(int v) {
+  public void validateVertex(int v) {
     if (v < 0 || v >= vertex) {
       throw new IllegalArgumentException("vertex " + v + " is valid.");
     }
