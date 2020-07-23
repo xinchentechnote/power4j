@@ -19,7 +19,17 @@ public class SelectionSort {
   }
 
   public static void sort(int[] nums) {
-
+    for (int i = 0; i < nums.length - 1; i++) {
+      int minimumIndex = i;
+      for (int j = i + 1; j < nums.length; j++) {
+        if (nums[minimumIndex] > nums[j]) {
+          minimumIndex = j;
+        }
+      }
+      int temp = nums[i];
+      nums[i] = nums[minimumIndex];
+      nums[minimumIndex] = temp;
+    }
   }
 
 
