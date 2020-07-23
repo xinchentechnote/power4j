@@ -18,6 +18,7 @@ public class BubblingSort {
 
   public static void sort(int[] nums) {
     for (int j = 0; j < nums.length - 1; j++) {
+      System.out.println(Arrays.toString(nums));
       boolean sorted = true;
       for (int i = 1; i < nums.length - j; i++) {
         if (nums[i] > nums[i - 1]) {

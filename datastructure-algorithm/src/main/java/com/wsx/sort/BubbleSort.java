@@ -11,7 +11,7 @@ import java.util.Arrays;
 public class BubbleSort {
 
   public static void main(String[] args) {
-    int[] nums = new int[]{3, 5, 8, 2, -3, 10, -6};
+    int[] nums = new int[]{8, 7, 6, 5, 4, 3};
     System.out.println(Arrays.toString(nums));
     //Arrays.sort(nums);//jdk的内部实现
     BubbleSort.sort(nums);
@@ -28,6 +28,7 @@ public class BubbleSort {
    */
   public static void sort(int[] nums) {
     for (int i = 0; i < nums.length - 1; i++) {
+      System.out.println(Arrays.toString(nums));
       boolean sorted = true;
       for (int j = 0; j < nums.length - 1 - i; j++) {
         if (nums[j] > nums[j + 1]) {
