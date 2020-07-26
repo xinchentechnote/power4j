@@ -48,7 +48,7 @@ public class LampControl {
     }
 
     /**
-     * @Description 取反.
+     * @Description (基于异或运算)取反.
      * @Author:wusx
      * @Date 20:28 2020/7/13
      * @Modified

@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-/**
+/**位排序.
  * @Description 100m的文件，都是不重复的8位数字，使用20m内存进行排序.输出到另外一个文件.
  * @Author:ShangxiuWu
  * @Date: 15:36 2020/7/4.
