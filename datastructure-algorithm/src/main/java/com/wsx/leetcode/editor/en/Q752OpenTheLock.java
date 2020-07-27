@@ -114,6 +114,7 @@ public class Q752OpenTheLock {
       while (!queue.isEmpty()) {
         String cur = queue.remove();
         List<String> nextStr = new ArrayList<>();
+        //状态转化
         char[] chars = cur.toCharArray();
         for (int i = 0; i < 4; i++) {
           char old = chars[i];
@@ -123,6 +124,7 @@ public class Q752OpenTheLock {
           nextStr.add(new String(chars));
           chars[i] = old;
         }
+        //状态转化
         for (String next : nextStr) {
           if (!deadSet.contains(next) && !visited.containsKey(next)) {
             queue.add(next);
