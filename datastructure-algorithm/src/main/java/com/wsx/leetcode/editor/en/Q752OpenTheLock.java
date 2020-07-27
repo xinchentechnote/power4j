@@ -117,10 +117,9 @@ public class Q752OpenTheLock {
         char[] chars = cur.toCharArray();
         for (int i = 0; i < 4; i++) {
           char old = chars[i];
-          chars[i] = Character.forDigit((chars[i] - '0' + 1) % 10, 10);
+          chars[i] = Character.forDigit((old - '0' + 1) % 10, 10);
           nextStr.add(new String(chars));
-          chars[i] = old;
-          chars[i] = Character.forDigit((chars[i] - '0' + 9) % 10, 10);
+          chars[i] = Character.forDigit((old - '0' + 9) % 10, 10);
           nextStr.add(new String(chars));
           chars[i] = old;
         }
