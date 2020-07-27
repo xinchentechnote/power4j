@@ -55,9 +55,9 @@
         leetcode529扫雷游戏
         leetcode827最大人工岛屿
 7、（LeetCode）广度优先遍历
-    图论搜索和人工智能
+    图论搜索和人工智能《人工智能》--清华大学出版社Stuart J.
         leetcode1091二进制矩阵中的最短路径
     图论建模的核心：状态表达
         LeetCode752打开转盘锁
         倒水问题5升-3升，4升
-        LeetCode773滑动谜题
+        LeetCode773滑动谜题（华容道）
