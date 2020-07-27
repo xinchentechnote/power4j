@@ -66,6 +66,9 @@ public class Q1091ShortestPathInBinaryMatrix {
 
   static
       //leetcode submit region begin(Prohibit modification and deletion)
+      /**
+       * BFS求最短路径
+       */
   class Solution {
 
       //八连通
