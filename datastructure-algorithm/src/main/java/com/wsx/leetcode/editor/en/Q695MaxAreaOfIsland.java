@@ -34,6 +34,7 @@ package com.wsx.leetcode.editor.en;
 
 //Java：Max Area of Island
 
+import java.util.ArrayList;
 import java.util.TreeSet;
 
 /**
@@ -51,19 +52,36 @@ public class Q695MaxAreaOfIsland {
   public static void main(String[] args) {
     Solution solution = new Solution();
     // TO TEST
+    int[][] data = {{1, 1, 0, 0, 0}, {1, 1, 0, 0, 0}, {0, 0, 0, 1, 1}, {0, 0, 0, 1, 1}};
+    int areaOfIsland = solution.maxAreaOfIsland(data);
+    System.out.println(areaOfIsland);
   }
 
   static
       //leetcode submit region begin(Prohibit modification and deletion)
   class Solution {
 
+    /** 行数.*/
     private int R;
+    /** 列数.*/
     private int C;
+    /** 原始矩阵.*/
     private int[][] grid;
+    /** 邻接表表示的图.*/
     private TreeSet<Integer>[] graph;
+    /** 四联通.*/
     private int[][] dirs = {{-1, 0}, {0, 1},
         {1, 0}, {0, -1}};
+    /** 访问标记.*/
+    int[] visited;
+    /** 是否有顶点.*/
+    private boolean hasVertex = false;
 
+    /**
+     * 最大岛屿面积（最大联通分量）
+     * @param grid
+     * @return
+     */
     public int maxAreaOfIsland(int[][] grid) {
       if (null == grid) {
         return 0;
@@ -76,14 +94,65 @@ public class Q695MaxAreaOfIsland {
       }
       this.R = grid.length;
       this.C = grid[0].length;
+      this.visited = new int[R * C];
+      for (int i = 0; i < visited.length; i++) {
+        visited[i] = -1;
+      }
       this.grid = grid;
       this.graph = constructGraph();
-      int result = 0;
+      //顶点全为0时，最大面积是0
+      if (!hasVertex) {
+        return 0;
+      }
       //求最大联通分量
-      return result;
+      return maximumCommutationComponent();
     }
 
-    //构建图对应的邻接表
+    private int maximumCommutationComponent() {
+      int commutationComponent = 0;
+      //深度遍历
+      for (int i = 0; i < graph.length; i++) {
+        if (visited[i] == -1) {
+          dfs(i, commutationComponent++);
+        }
+      }
+      //求联通分量顶点
+      ArrayList<Integer>[] res = new ArrayList[commutationComponent + 1];
+      for (int i = 0; i < res.length; i++) {
+        res[i] = new ArrayList<>();
+      }
+      for (int i = 0; i < visited.length; i++) {
+        res[visited[i]].add(i);
+      }
+      //获取最大联通分量顶点数
+      int maxArea = 0;
+      for (int i = 0; i < res.length; i++) {
+        int size = res[i].size();
+        if (size > maxArea) {
+          maxArea = size;
+        }
+      }
+      return maxArea;
+    }
+
+    /**
+     * 深度优先遍历
+     * @param v
+     * @param commutationComponent
+     */
+    private void dfs(int v, int commutationComponent) {
+      visited[v] = commutationComponent;
+      for (Integer w : graph[v]) {
+        if (visited[w] == -1) {
+          dfs(w, commutationComponent);
+        }
+      }
+    }
+
+    /**
+     * 构建图对应的邻接表
+     * @return
+     */
     private TreeSet<Integer>[] constructGraph() {
       TreeSet<Integer>[] g = new TreeSet[R * C];
       for (int i = 0; i < g.length; i++) {
@@ -93,15 +162,16 @@ public class Q695MaxAreaOfIsland {
         //一维数组转二维
         int x = v / C, y = v % C;
         if (grid[x][y] == 1) {
+          hasVertex = true;
           for (int d = 0; d < dirs.length; d++) {
             int nextX = x + dirs[d][0];
             int nextY = y + dirs[d][1];
             if (inArea(nextX, nextY) && grid[nextX][nextY] == 1) {
-                //二维数组转一维
-                int e = nextX * C + nextY;
-                graph[v].add(e);
-                //无向图
-                graph[e].add(v);
+              //二维数组转一维
+              int e = nextX * C + nextY;
+              g[v].add(e);
+              //无向图
+              g[e].add(v);
             }
           }
         }
@@ -109,7 +179,12 @@ public class Q695MaxAreaOfIsland {
       return g;
     }
 
-    //判断下标是否在矩阵内
+    /**
+     * 判断下标是否在矩阵内
+     * @param nextX
+     * @param nextY
+     * @return
+     */
     private boolean inArea(int nextX, int nextY) {
       return nextX >= 0 && nextX < R && nextY >= 0 && nextY < C;
     }
