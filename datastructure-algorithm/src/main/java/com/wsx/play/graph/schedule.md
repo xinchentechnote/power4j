@@ -40,9 +40,20 @@
    环检测
    对比：
         BFS无权图最短路径问题
-6、图论问题建模（LeetCode）
+6、图论问题建模（LeetCode）深度优先遍历
    q785判断二分图
    q695岛屿的最大面积
-    构建邻接表
-    不构建邻接表
-7、
+        构建邻接表
+        不构建邻接表
+   floodfill算法：
+        魔法棒、扫雷游戏、连连看
+        leetcode200岛屿数量
+        leetcode1020飞地数量
+        leetcode130被围绕的区域
+        leetcode733图像渲染floodfill
+        leetcode1034边框着色
+        leetcode529扫雷游戏
+        leetcode827最大人工岛屿
+7、（LeetCode）广度优先遍历
+    图论搜索和人工智能
+    leetcode1091二进制矩阵中的最短路径
