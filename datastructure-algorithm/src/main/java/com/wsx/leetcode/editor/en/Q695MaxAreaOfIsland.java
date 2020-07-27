@@ -77,7 +77,7 @@ public class Q695MaxAreaOfIsland {
       this.grid = grid;
       this.graph = constructGraph();
       int result = 0;
-
+      //求最大联通分量
       return result;
     }
 
