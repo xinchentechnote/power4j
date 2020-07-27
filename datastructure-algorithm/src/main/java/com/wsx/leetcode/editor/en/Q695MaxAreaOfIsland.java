@@ -81,6 +81,7 @@ public class Q695MaxAreaOfIsland {
       return result;
     }
 
+    //构建图对应的邻接表
     private TreeSet<Integer>[] constructGraph() {
       TreeSet<Integer>[] g = new TreeSet[R * C];
       for (int i = 0; i < g.length; i++) {
@@ -106,6 +107,7 @@ public class Q695MaxAreaOfIsland {
       return g;
     }
 
+    //判断下标是否在矩阵内
     private boolean inArea(int nextX, int nextY) {
       return nextX >= 0 && nextX < R && nextY >= 0 && nextY < C;
     }
