@@ -53,7 +53,7 @@ public class Q695MaxAreaOfIsland {
   public static void main(String[] args) {
     Solution solution = new Solution();
     // TO TEST
-//    int[][] data = {{1, 1, 0, 0, 0}, {1, 1, 0, 0, 0}, {0, 0, 0, 1, 1}, {0, 0, 0, 1, 1}};
+    // int[][] data = {{1, 1, 0, 0, 0}, {1, 1, 0, 0, 0}, {0, 0, 0, 1, 1}, {0, 0, 0, 1, 1}};
     int[][] data = {{1, 1, 0, 1, 1}, {1, 0, 0, 0, 0}, {0, 0, 0, 0, 1}, {1, 1, 0, 1, 1}};
     int areaOfIsland = solution.maxAreaOfIsland(data);
     System.out.println(areaOfIsland);
@@ -109,7 +109,7 @@ public class Q695MaxAreaOfIsland {
     }
 
     /**
-     * 深度优先遍历
+     * 深度优先遍历，求联通分量
      * @param i
      */
     private int dfs(int i, int j) {
