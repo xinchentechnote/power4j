@@ -48,7 +48,8 @@ public class Q7ReverseInteger {
   class Solution {
 
     public int reverse(int x) {
-      boolean symbol = (x & 0x80_00_00_00) == 0x80_00_00_00;
+      boolean symbol = x < 0;
+      //boolean symbol = (x & 0x80_00_00_00) == 0x80_00_00_00;
       int usignX = Math.abs(x);
       int i = 0;
       Queue<Integer> queue = new LinkedList<>();
