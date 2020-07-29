@@ -48,7 +48,7 @@ public class Q7ReverseInteger {
       //leetcode submit region begin(Prohibit modification and deletion)
   class Solution {
 
-    public int reverse1(int x) {
+    public int reverse(int x) {
       long max = 0x7fffffff;
       long min = 0x80000000;
       int res = 0;
@@ -62,7 +62,7 @@ public class Q7ReverseInteger {
       return res;
     }
 
-    public int reverse(int x) {
+    public int reverse1(int x) {
       boolean symbol = x < 0;
       //boolean symbol = (x & 0x80_00_00_00) == 0x80_00_00_00;
       int usignX = Math.abs(x);
