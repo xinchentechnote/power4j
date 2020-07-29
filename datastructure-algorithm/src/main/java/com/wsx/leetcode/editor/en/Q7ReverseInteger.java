@@ -33,7 +33,6 @@ package com.wsx.leetcode.editor.en;
 
 import java.util.LinkedList;
 import java.util.Queue;
-import java.util.Stack;
 
 //Java：Reverse Integer
 public class Q7ReverseInteger {
