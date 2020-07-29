@@ -41,11 +41,26 @@ public class Q7ReverseInteger {
     Solution solution = new Solution();
     // TO TEST
     System.out.println(solution.reverse(-321));
+    System.out.println(solution.reverse1(-321));
   }
 
   static
       //leetcode submit region begin(Prohibit modification and deletion)
   class Solution {
+
+    public int reverse1(int x) {
+      long max = 0x7fffffff;
+      long min = 0x80000000;
+      int res = 0;
+      while (x != 0) {
+        res = res * 10 + x % 10;
+        x = x / 10;
+      }
+      if (max < res || res < min) {
+        return 0;
+      }
+      return res;
+    }
 
     public int reverse(int x) {
       boolean symbol = x < 0;
