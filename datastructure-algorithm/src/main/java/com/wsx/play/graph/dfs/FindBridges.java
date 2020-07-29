@@ -25,6 +25,7 @@ public class FindBridges {
     this.graph = graph;
     visited = new boolean[graph.getVertex()];
     res = new ArrayList<>();
+    //遍历顺序
     order = new int[graph.getVertex()];
     low = new int[graph.getVertex()];
     cnt = 0;

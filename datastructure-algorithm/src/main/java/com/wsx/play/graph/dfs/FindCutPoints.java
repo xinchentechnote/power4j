@@ -1,8 +1,8 @@
 package com.wsx.play.graph.dfs;
 
 import com.wsx.play.graph.Graph;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @Description 寻找割点.
@@ -14,17 +14,17 @@ public class FindCutPoints {
 
   private Graph graph;
   private boolean[] visited;
-
+  //遍历顺序
   private int[] order;
   private int[] low;
   private int cnt;
 
-  private List<Integer> res;
+  private Set<Integer> res;
 
   public FindCutPoints(Graph graph) {
     this.graph = graph;
     visited = new boolean[graph.getVertex()];
-    res = new ArrayList<>();
+    res = new HashSet<>();
     order = new int[graph.getVertex()];
     low = new int[graph.getVertex()];
     cnt = 0;
@@ -60,7 +60,7 @@ public class FindCutPoints {
   }
 
 
-  public List<Integer> result() {
+  public Set<Integer> result() {
     return res;
   }
 }
