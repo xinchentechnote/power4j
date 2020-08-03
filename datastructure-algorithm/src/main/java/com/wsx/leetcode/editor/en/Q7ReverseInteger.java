@@ -42,13 +42,16 @@ public class Q7ReverseInteger {
     // TO TEST
     System.out.println(solution.reverse(-321));
     System.out.println(solution.reverse1(-321));
+
+    int rev = 12;
+    System.out.println((rev << 3) + (rev << 2));
   }
 
   static
       //leetcode submit region begin(Prohibit modification and deletion)
   class Solution {
 
-    public int reverse(int x) {
+    public int reverse4(int x) {
       long max = 0x7fffffff;
       long min = 0x80000000;
       int res = 0;
@@ -61,6 +64,46 @@ public class Q7ReverseInteger {
       }
       return res;
     }
+
+    /**.
+     * 最优解
+     * @param x
+     * @return
+     */
+    public int reverse2(int x) {
+      int rev = 0;
+      while (x != 0) {
+        int pop = x % 10;
+        x /= 10;
+        //判断溢出
+        if (rev > 214748364 || (rev == 214748364 && pop > 7)) {
+          return 0;
+        }
+        //判断溢出
+        if (rev < -214748364 || (rev == -214748364 && pop < -8)) {
+          return 0;
+        }
+        rev = (rev << 3) + (rev << 1) + pop;
+      }
+      return rev;
+    }
+
+    public int reverse(int x) {
+      int rev = 0;
+      while (x != 0) {
+        int pop = x % 10;
+        x /= 10;
+        if (rev > Integer.MAX_VALUE / 10 || (rev == Integer.MAX_VALUE / 10 && pop > 7)) {
+          return 0;
+        }
+        if (rev < Integer.MIN_VALUE / 10 || (rev == Integer.MIN_VALUE / 10 && pop < -8)) {
+          return 0;
+        }
+        rev = rev * 10 + pop;
+      }
+      return rev;
+    }
+
 
     public int reverse1(int x) {
       boolean symbol = x < 0;
