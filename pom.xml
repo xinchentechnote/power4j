@@ -12,6 +12,7 @@
     <module>datastructure-algorithm</module>
     <module>concurrent-art</module>
     <module>thinking-in-jvm</module>
+    <module>thinking-in-netty</module>
     <module>thinking-in-spring</module>
     <module>thinking-in-springboot</module>
     <module>thinking-in-springcloud</module>
