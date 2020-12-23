@@ -20,6 +20,9 @@
     <java.version>1.8</java.version>
   </properties>
 
+  <modules>
+    <module>demo-springboot</module>
+  </modules>
   <dependencies>
     <dependency>
       <groupId>com.baomidou</groupId>
